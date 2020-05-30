@@ -205,7 +205,7 @@ public class LoginFrame extends JFrame {
 
 	private JButton getLoginButton() {
 		if (btnLogin == null)
-			btnLogin = ButtonFactory.getInstance().create("Login");
+			btnLogin = ButtonFactory.getInstance().create("Login", false);
 
 		return btnLogin;
 	}

@@ -232,7 +232,7 @@ public class RegisterFrame extends JFrame {
 
 	private JButton getRegisterButton() {
 		if (btnRegister == null)
-			btnRegister = ButtonFactory.getInstance().create("Register");
+			btnRegister = ButtonFactory.getInstance().create("Register", false);
 
 		return btnRegister;
 	}

@@ -14,6 +14,9 @@ public class ButtonFactory {
 	private final static int DEFAULT_WIDTH = 250;
 	private final static int DEFAULT_HEIGHT = 30;
 	
+	private final static int MENU_WIDTH = 160;
+	private final static int MENU_HEIGHT = 50;
+	
 	private static ButtonFactory buttonFactory;
 
 	public static synchronized ButtonFactory getInstance() {
@@ -42,10 +45,21 @@ public class ButtonFactory {
 		jButton.setPreferredSize(dimension);
 	}
 	
-	public JButton create(String text) {
+	private void setMenuStyle(JButton jButton) {
+		
+		Dimension dimension = new Dimension(MENU_WIDTH, MENU_HEIGHT);
+		jButton.setPreferredSize(dimension);
+		
+	}
+	
+	public JButton create(String text, boolean isMenu) {
 		JButton jButton = new JButton();
 		jButton.setText(text);
 		setDefaultStyle(jButton);
+		
+		if(isMenu)
+			setMenuStyle(jButton);
+			
 		return jButton;
 	}
 	

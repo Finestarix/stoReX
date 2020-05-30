@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import app.model.User;
 import app.repository.UserRepository;
-import app.session.UserSession;
 import util.HashingHandler;
 
 public class UserController {
@@ -17,10 +16,8 @@ public class UserController {
 
 		User user = null;
 		
-		if (users.size() >= 1) {
+		if (users.size() >= 1) 
 			user = users.get(0);
-			UserSession.setUser(user);
-		}
 		
 		return user;
 	}

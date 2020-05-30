@@ -27,7 +27,7 @@ public class UserMainFrame extends JFrame {
 		setTitle(FRAME_TITLE);
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
 
 		ImageIcon frameIcon = new ImageIcon(FileHandler.getAssetsPath("logo-small.png"));
