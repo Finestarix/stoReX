@@ -10,15 +10,11 @@ import util.HashingHandler;
 public class UserController {
 
 	public static User auth(String email, String password) {
-
 		String hashedPassword = HashingHandler.SHA256(password);
 		ArrayList<User> users = UserRepository.getUserByEmailAndPassword(email, hashedPassword);
-
 		User user = null;
-		
 		if (users.size() >= 1) 
 			user = users.get(0);
-		
 		return user;
 	}
 	

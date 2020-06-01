@@ -14,15 +14,17 @@ public class CardManageProductPanel extends JPanel {
 	public final static String VIEW_GRID_PANEL = "View Grid";
 	
 	private CardLayout cardLayout;
+	private CardManageProductList cardManageProductList;
+	private CardManageProductGrid cardManageProductGrid;
 	
 	public CardManageProductPanel() {
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
 		
-		CardManageProductList cardManageProductList = new CardManageProductList();
+		cardManageProductList = new CardManageProductList();
 		this.add(cardManageProductList, VIEW_LIST_PANEL);
 		
-		CardManageProductGrid cardManageProductGrid = new CardManageProductGrid();
+		cardManageProductGrid = new CardManageProductGrid();
 		this.add(cardManageProductGrid, VIEW_GRID_PANEL);
 	}
 
@@ -30,4 +32,11 @@ public class CardManageProductPanel extends JPanel {
 		return cardLayout;
 	}
 	
+	public CardManageProductList getCardManageProductList() {
+		return cardManageProductList;
+	}
+	
+	public CardManageProductGrid getCardManageProductGrid() {
+		return cardManageProductGrid;
+	}
 }

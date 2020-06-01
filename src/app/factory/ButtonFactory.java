@@ -84,6 +84,14 @@ public class ButtonFactory {
 		return jButton;
 	}
 	
+	public JButton create(String text, String color) {
+		JButton jButton = new JButton();
+		jButton.setText(text);
+		setDefaultStyle(jButton);
+		jButton.setBackground(ColorHandler.getColor(color));
+		return jButton;
+	}
+	
 	public JButton create(ImageIcon imageIcon, boolean isSmall) {
 		JButton jButton = new JButton();
 		setDefaultStyle(jButton);

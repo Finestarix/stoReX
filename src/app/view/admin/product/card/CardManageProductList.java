@@ -25,7 +25,7 @@ public class CardManageProductList extends JPanel {
 
 	private static final Color PANEL_COLOR = Color.WHITE;
 	private static final int PANEL_WIDTH = 840;
-	private static final int PANEL_HEIGHT = 530;
+	private static final int PANEL_HEIGHT = 500;
 
 	private JPanel productListPanel;
 	private JScrollPane jScrollPane;
@@ -33,7 +33,7 @@ public class CardManageProductList extends JPanel {
 
 	private int totalComponentLoaded = 0;
 	private int currentProductPage = 1;
-	private int totalProductLoaded = 0;
+	private int totalProduct = 0;
 
 	public CardManageProductList() {
 		initializePanel();
@@ -57,25 +57,28 @@ public class CardManageProductList extends JPanel {
 			jScrollPane = new JScrollPane(productListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			jScrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-			jScrollPane.getVerticalScrollBar().setUnitIncrement(25);
+			jScrollPane.getVerticalScrollBar().setUnitIncrement(20);
 			jScrollPane.setBackground(PANEL_COLOR);
 			jScrollPane.setLayout(new ScrollPaneLayout());
 			jScrollPane.getViewport().setBackground(PANEL_COLOR);
 
 			jScrollBar = jScrollPane.getVerticalScrollBar();
 			jScrollBar.addAdjustmentListener(adjustmentListener);
-			refreshPanel(false);
+			refreshPanel(false, false);
 		}
 
 		return productListPanel;
 	}
 
-	private void refreshPanel(boolean isRefresh) {
+	public void refreshPanel(boolean isRefresh, boolean isAdd) {
+
+		if (isAdd)
+			totalComponentLoaded++;
 		
-		if (isRefresh)
+		if (isRefresh) 
 			initializeProductListPanel().removeAll();
-		
-		totalProductLoaded = ProductController.getTotalProduct();
+
+		totalProduct = ProductController.getTotalProduct();
 		new ProductFetcher(isRefresh).execute();
 	}
 
@@ -83,12 +86,14 @@ public class CardManageProductList extends JPanel {
 
 		@Override
 		public void adjustmentValueChanged(AdjustmentEvent e) {
+
 			totalComponentLoaded = CardManageProductList.this.initializeProductListPanel().getComponentCount();
-			System.out.println(totalComponentLoaded);
+			totalProduct = ProductController.getTotalProduct();
+
 			if (!e.getValueIsAdjusting() && e.getValue() == jScrollBar.getMaximum() - jScrollBar.getVisibleAmount()
-					&& totalComponentLoaded != totalProductLoaded) {
+					&& totalComponentLoaded < totalProduct) {
 				currentProductPage++;
-				refreshPanel(false);
+				refreshPanel(false, false);
 			}
 		}
 	};
@@ -121,7 +126,7 @@ public class CardManageProductList extends JPanel {
 			for (int i = 0; i < chunks.size(); i++) {
 				Product product = chunks.get(i);
 				ProductList productList = new ProductList(product, () -> {
-					refreshPanel(true);
+					refreshPanel(true, false);
 					return null;
 				});
 				initializeProductListPanel().add(productList, gridBagConstraints);

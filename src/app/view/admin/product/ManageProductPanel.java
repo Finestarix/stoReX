@@ -16,9 +16,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import app.factory.ButtonFactory;
+import app.factory.DialogFactory;
 import app.factory.TextFieldFactory;
+import app.view.admin.product.dialog.DialogAddProduct;
 import util.ColorHandler;
 import util.FileHandler;
+import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class ManageProductPanel extends JPanel {
@@ -33,19 +36,22 @@ public class ManageProductPanel extends JPanel {
 	private static final int TEXT_FIELD_HEIGHT = 40;
 
 	private CardManageProductPanel cardManageProductPanel;
-	
+
 	private JTextField searchTextField;
 	private JButton listViewButton;
 	private JButton gridViewButton;
 	private JButton addButton;
 	private JButton searchButton;
+	
+	private DialogAddProduct dialogAddProduct;
 
 	public ManageProductPanel() {
 		initializePanel();
 		initializeComponent();
-		
+
 		getListButton().addActionListener(listActionListener);
 		getGridButton().addActionListener(gridActionListener);
+		getAddButton().addActionListener(addActionListener);
 	}
 
 	private void initializePanel() {
@@ -82,8 +88,8 @@ public class ManageProductPanel extends JPanel {
 	private JTextField getSearchTextField() {
 		if (searchTextField == null) {
 			Dimension dimension = new Dimension(TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
-			MatteBorder matteBorder = new MatteBorder(BORDER_FIELD_TEXT, BORDER_FIELD_TEXT, BORDER_FIELD_TEXT, BORDER_FIELD_TEXT,
-					ColorHandler.getColor(ColorHandler.PRIMARY_BACKGROUND));
+			MatteBorder matteBorder = new MatteBorder(BORDER_FIELD_TEXT, BORDER_FIELD_TEXT, BORDER_FIELD_TEXT,
+					BORDER_FIELD_TEXT, ColorHandler.getColor(ColorHandler.PRIMARY_BACKGROUND));
 			searchTextField = TextFieldFactory.getInstance().create(false, null);
 			searchTextField.setBorder(matteBorder);
 			searchTextField.setPreferredSize(dimension);
@@ -127,13 +133,37 @@ public class ManageProductPanel extends JPanel {
 
 		return addButton;
 	}
-	
+
 	private CardManageProductPanel getManageProductPanel() {
 		if (cardManageProductPanel == null)
 			cardManageProductPanel = new CardManageProductPanel();
 
 		return cardManageProductPanel;
 	}
+
+	private ActionListener addActionListener = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			ManageProductPanel.this.dialogAddProduct = new DialogAddProduct();
+			dialogAddProduct.setCallable(() -> {
+				cardManageProductPanel.getCardManageProductGrid().refreshPanel(true, true);
+				cardManageProductPanel.getCardManageProductList().refreshPanel(true, true);
+				
+				ManageProductPanel.this.dialogAddProduct.close();
+				
+				if (ManageProductPanel.this.dialogAddProduct.getDialogResult() == DialogFactory.CONFIRM) {
+					String message = "Insert success !";
+					MessageHandler.success(message);
+				}
+				
+				return null;				
+			});
+			
+			dialogAddProduct.setVisible(true);
+		}
+	};
 
 	private ActionListener listActionListener = new ActionListener() {
 
@@ -152,5 +182,5 @@ public class ManageProductPanel extends JPanel {
 			cardLayout.show(cardManageProductPanel, CardManageProductPanel.VIEW_GRID_PANEL);
 		}
 	};
-	
+
 }

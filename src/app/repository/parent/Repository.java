@@ -57,6 +57,7 @@ public abstract class Repository<T> {
 				statement.setString(i, params[i - 1]);
 			statement.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			MessageHandler.error("Failed to execute query !");
 			System.exit(0);
 		}

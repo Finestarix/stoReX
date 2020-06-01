@@ -24,7 +24,7 @@ public class CardManageProductGrid extends JPanel {
 
 	private static final Color PANEL_COLOR = Color.WHITE;
 	private static final int PANEL_WIDTH = 840;
-	private static final int PANEL_HEIGHT = 530;
+	private static final int PANEL_HEIGHT = 500;
 
 	private JPanel productListPanel;
 	private JScrollPane jScrollPane;
@@ -32,7 +32,7 @@ public class CardManageProductGrid extends JPanel {
 
 	private int totalComponentLoaded = 0;
 	private int currentProductPage = 1;
-	private int totalProductLoaded = 0;
+	private int totalProduct = 0;
 
 	public CardManageProductGrid() {
 		initializePanel();
@@ -62,18 +62,21 @@ public class CardManageProductGrid extends JPanel {
 
 			jScrollBar = jScrollPane.getVerticalScrollBar();
 			jScrollBar.addAdjustmentListener(adjustmentListener);
-			refreshPanel(false);
+			refreshPanel(false, false);
 		}
 
 		return productListPanel;
 	}
 
-	private void refreshPanel(boolean isRefresh) {
+	public void refreshPanel(boolean isRefresh, boolean isAdd) {
+		
+		if (isAdd)
+			totalComponentLoaded++;
 		
 		if (isRefresh)
 			initializeProductListPanel().removeAll();
 		
-		totalProductLoaded = ProductController.getTotalProduct();
+		totalProduct = ProductController.getTotalProduct();
 		new ProductFetcher(isRefresh).execute();
 	}
 
@@ -81,12 +84,14 @@ public class CardManageProductGrid extends JPanel {
 
 		@Override
 		public void adjustmentValueChanged(AdjustmentEvent e) {
+			
 			totalComponentLoaded = CardManageProductGrid.this.initializeProductListPanel().getComponentCount();
-			System.out.println(totalComponentLoaded);
+			totalProduct = ProductController.getTotalProduct();
+
 			if (!e.getValueIsAdjusting() && e.getValue() == jScrollBar.getMaximum() - jScrollBar.getVisibleAmount()
-					&& totalComponentLoaded != totalProductLoaded) {
+					&& totalComponentLoaded < totalProduct) {
 				currentProductPage++;
-				refreshPanel(false);
+				refreshPanel(false, false);
 			}
 		}
 	};
@@ -113,7 +118,7 @@ public class CardManageProductGrid extends JPanel {
 			for (int i = 0; i < chunks.size(); i++) {
 				Product product = chunks.get(i);
 				ProductGrid productList = new ProductGrid(product, () -> {
-					refreshPanel(true);
+					refreshPanel(true, false);
 					return null;
 				});
 				initializeProductListPanel().add(productList);

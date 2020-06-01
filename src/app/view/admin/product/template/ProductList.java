@@ -12,16 +12,19 @@ import java.util.concurrent.Callable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import app.controller.ProductController;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.model.Product;
 import util.ColorHandler;
 import util.FileHandler;
+import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class ProductList extends JPanel implements ProductInterface {
@@ -61,12 +64,12 @@ public class ProductList extends JPanel implements ProductInterface {
 		Dimension dimension = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
 		Border panelBorder = new MatteBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE,
 				ColorHandler.getColor(ColorHandler.PRIMARY_DANGER));
-		
+
 		setOpaque(false);
 		setLayout(new BorderLayout());
 		setBackground(PANEL_COLOR);
 		setBorder(panelBorder);
-		setPreferredSize(dimension); 
+		setPreferredSize(dimension);
 	}
 
 	@Override
@@ -179,7 +182,20 @@ public class ProductList extends JPanel implements ProductInterface {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				refreshCallable.call();
+				
+				String message = "Do you want to delete " + product.getName() + " ?";
+				int confirmationResult = MessageHandler.confirmation(message);
+
+				if (confirmationResult == JOptionPane.YES_OPTION) {
+
+					ProductController.deleteProduct(product);
+
+					message = "Delete success !";
+					MessageHandler.success(message);
+
+					refreshCallable.call();
+				}
+				
 			} catch (Exception exception) {
 			}
 		}

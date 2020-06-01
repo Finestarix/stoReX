@@ -13,22 +13,23 @@ public class ProductRepository extends Repository<Product> {
 	private static final String TABLE_NAME = "products";
 
 	public static ArrayList<Product> getAllProducts() {
-		String query = String.format("SELECT * FROM %s", TABLE_NAME);
+		String query = String.format("SELECT * FROM %s ORDER BY created_at", TABLE_NAME);
 		ResultSet resultSet = Repository.executeQuery(query);
 		return Repository.toObject(Product.class, resultSet);
 	}
 
 	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem) {
-		String query = String.format("SELECT * FROM %s LIMIT %d", TABLE_NAME, currentLoadedItem);
-		System.out.println(query);
+		String query = String.format("SELECT * FROM %s ORDER BY created_at LIMIT %d", TABLE_NAME, currentLoadedItem);
 		ResultSet result = Repository.executeQuery(query);
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
+
+		System.out.println("Loaded");
 		return loadedProducts;
 	}
-	
+
 	public static ArrayList<Product> getProductsPerPage(int currentLoadedPage) {
-		String query = String.format("SELECT * FROM %s LIMIT %d,%d", TABLE_NAME, (currentLoadedPage - 1) * ITEM_LOAD, ITEM_LOAD);
-		System.out.println(query);
+		String query = String.format("SELECT * FROM %s ORDER BY created_at LIMIT %d,%d", TABLE_NAME,
+				(currentLoadedPage - 1) * ITEM_LOAD, ITEM_LOAD);
 		ResultSet result = Repository.executeQuery(query);
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
 		return loadedProducts;
@@ -46,4 +47,22 @@ public class ProductRepository extends Repository<Product> {
 
 		return -1;
 	}
+
+	public static void insertProduct(Product product) {
+		String query = String.format("INSERT INTO %s (id, name, price, quantity) VALUES(?, ?, ?, ?)", TABLE_NAME);
+		ProductRepository.executeUpdate(query, product.getId(), product.getName(), Integer.toString(product.getPrice()),
+				Integer.toString(product.getQuantity()));
+	}
+
+	public static void updateProduct(Product product) {
+		String query = String.format("UPDATE %s SET name = ?, price = ?, quantity = ? WHERE id LIKE ?", TABLE_NAME);
+		ProductRepository.executeUpdate(query, product.getName(), Integer.toString(product.getPrice()),
+				Integer.toString(product.getQuantity()));
+	}
+
+	public static void deleteProduct(Product product) {
+		String query = String.format("DELETE FROM %s WHERE id LIKE ?", TABLE_NAME);
+		ProductRepository.executeUpdate(query, product.getId());
+	}
+
 }

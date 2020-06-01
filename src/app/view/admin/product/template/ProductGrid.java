@@ -12,15 +12,19 @@ import java.util.concurrent.Callable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import app.controller.ProductController;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.model.Product;
 import util.ColorHandler;
 import util.FileHandler;
+import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class ProductGrid extends JPanel implements ProductInterface {
@@ -28,6 +32,10 @@ public class ProductGrid extends JPanel implements ProductInterface {
 	private static final int PANEL_WIDTH = 840 / 4;
 	private static final int PANEL_HEIGHT = 110;
 	private static final int BORDER_SIZE = 1;
+	private static final int BORDER_ALL_TOP = 0;
+	private static final int BORDER_ALL_BOTTOM = 0;
+	private static final int BORDER_ALL_LEFT = 10;
+	private static final int BORDER_ALL_RIGHT = 20;
 	private static final Color PANEL_COLOR = Color.WHITE;
 
 	private JLabel nameLabel;
@@ -73,9 +81,12 @@ public class ProductGrid extends JPanel implements ProductInterface {
 
 	@Override
 	public JPanel getDataComponent() {
-		
+
+		Border panelBorder = new EmptyBorder(BORDER_ALL_TOP, BORDER_ALL_LEFT, BORDER_ALL_BOTTOM, BORDER_ALL_RIGHT);
+
 		JPanel jPanel = new JPanel(new BorderLayout());
 		jPanel.setBackground(PANEL_COLOR);
+		jPanel.setBorder(panelBorder);
 		jPanel.add(getNameLabel(), BorderLayout.NORTH);
 		jPanel.add(getPriceLabel(), BorderLayout.CENTER);
 		jPanel.add(getQuantityLabel(), BorderLayout.SOUTH);
@@ -169,7 +180,20 @@ public class ProductGrid extends JPanel implements ProductInterface {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				refreshCallable.call();
+
+				String message = "Do you want to delete " + product.getName() + " ?";
+				int confirmationResult = MessageHandler.confirmation(message);
+
+				if (confirmationResult == JOptionPane.YES_OPTION) {
+
+					ProductController.deleteProduct(product);
+
+					message = "Delete success !";
+					MessageHandler.success(message);
+
+					refreshCallable.call();
+				}
+
 			} catch (Exception exception) {
 			}
 		}

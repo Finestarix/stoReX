@@ -10,8 +10,6 @@ public class UserRepository extends Repository<User> {
 
 	private static final String TABLE_NAME = "users";
 
-	private static final ArrayList<User> users = new ArrayList<User>();
-
 	public static ArrayList<User> getUserByEmailAndPassword(String email, String password) {
 		String query = String.format("SELECT * FROM %s WHERE email=? AND password=?", TABLE_NAME);
 		ResultSet result = UserRepository.executeQuery(query, email, password);
@@ -21,7 +19,6 @@ public class UserRepository extends Repository<User> {
 	public static void insertUser(User user) {
 		String query = String.format("INSERT INTO %s (id, name, email, password, role) VALUES(?, ?, ?, ?, ?)", TABLE_NAME);
 		UserRepository.executeUpdate(query, user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getRole());
-		users.add(user);
 	}
 
 }
