@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
 	private static final int PANEL_TOP_BORDER_ZERO = 0;
 	private static final int PANEL_TOP_BORDER_HEIGHT = 15;
 
-	private CardMainFrame adminCardPanel;
+	private CardMainFrame cardMainFrame;
 	private JLabel lblLogo;
 	private JButton homeButton;
 	private JButton userButton;
@@ -69,7 +69,7 @@ public class MainFrame extends JFrame {
 		JPanel jPanel = new JPanel();
 		jPanel.setBackground(FRAME_COLOR);
 		jPanel.add(getTopComponent(), BorderLayout.NORTH);
-		jPanel.add(getAdminCardPanel(), BorderLayout.CENTER);
+		jPanel.add(getCardMainFrame(), BorderLayout.CENTER);
 
 		this.add(jPanel);
 	}
@@ -141,19 +141,19 @@ public class MainFrame extends JFrame {
 		return logoutButton;
 	}
 
-	private CardMainFrame getAdminCardPanel() {
-		if (adminCardPanel == null)
-			adminCardPanel = new CardMainFrame();
+	private CardMainFrame getCardMainFrame() {
+		if (cardMainFrame == null)
+			cardMainFrame = new CardMainFrame();
 
-		return adminCardPanel;
+		return cardMainFrame;
 	}
 
 	private ActionListener homeActionListener = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			CardLayout cardLayout = adminCardPanel.getCardLayout();
-			cardLayout.show(adminCardPanel, CardMainFrame.HOME_PANEL);
+			CardLayout cardLayout = cardMainFrame.getCardLayout();
+			cardLayout.show(cardMainFrame, CardMainFrame.HOME_PANEL);
 		}
 	};
 	
@@ -161,8 +161,8 @@ public class MainFrame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			CardLayout cardLayout = adminCardPanel.getCardLayout();
-			cardLayout.show(adminCardPanel, CardMainFrame.MANAGE_USER_PANEL);
+			CardLayout cardLayout = cardMainFrame.getCardLayout();
+			cardLayout.show(cardMainFrame, CardMainFrame.MANAGE_USER_PANEL);
 		}
 	};
 
@@ -170,8 +170,8 @@ public class MainFrame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			CardLayout cardLayout = adminCardPanel.getCardLayout();
-			cardLayout.show(adminCardPanel, CardMainFrame.MANAGE_PRODUCT_PANEL);
+			CardLayout cardLayout = cardMainFrame.getCardLayout();
+			cardLayout.show(cardMainFrame, CardMainFrame.MANAGE_PRODUCT_PANEL);
 		}
 	};
 

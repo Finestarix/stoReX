@@ -1,9 +1,8 @@
-package app.view.admin.product.list;
+package app.view.admin.product.template;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -15,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import app.factory.ButtonFactory;
@@ -24,15 +22,12 @@ import app.model.Product;
 import util.ColorHandler;
 import util.FileHandler;
 
-public class ProductList extends JPanel implements ProductInterface {
+@SuppressWarnings("serial")
+public class ProductGrid extends JPanel implements ProductInterface {
 
-	private static final int PANEL_WIDTH = 840;
-	private static final int PANEL_HEIGHT = 60;
+	private static final int PANEL_WIDTH = 840 / 4;
+	private static final int PANEL_HEIGHT = 110;
 	private static final int BORDER_SIZE = 1;
-	private static final int BORDER_DATA_SIZE = 2;
-	private static final int BORDER_DATA_LEFT_SIZE = 10;
-	private static final int BORDER_BUTTON_SIZE = 2;
-	private static final int BORDER_BUTTTON_RIGHT_SIZE = 20;
 	private static final Color PANEL_COLOR = Color.WHITE;
 
 	private JLabel nameLabel;
@@ -45,7 +40,7 @@ public class ProductList extends JPanel implements ProductInterface {
 
 	private Product product;
 
-	public ProductList(Product product, Callable<Void> refreshCallable) {
+	public ProductGrid(Product product, Callable<Void> refreshCallable) {
 		this.refreshCallable = refreshCallable;
 		this.product = product;
 
@@ -58,31 +53,29 @@ public class ProductList extends JPanel implements ProductInterface {
 
 	@Override
 	public void initializePanel() {
+
+		Dimension dimension = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
+		Border panelBorder = new MatteBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE,
+				ColorHandler.getColor(ColorHandler.PRIMARY_DANGER));
+
 		setOpaque(false);
 		setLayout(new BorderLayout());
 		setBackground(PANEL_COLOR);
-
-		Dimension dimension = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
 		setPreferredSize(dimension);
-		Border panelBorder = new MatteBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE,
-				ColorHandler.getColor(ColorHandler.PRIMARY_DANGER));
 		setBorder(panelBorder);
 	}
 
 	@Override
 	public void initializeComponent() {
 		this.add(getDataComponent(), BorderLayout.CENTER);
-		this.add(getButtonComponent(), BorderLayout.EAST);
+		this.add(getButtonComponent(), BorderLayout.SOUTH);
 	}
 
 	@Override
 	public JPanel getDataComponent() {
-
-		Border panelBorder = new EmptyBorder(BORDER_DATA_SIZE, BORDER_DATA_LEFT_SIZE, BORDER_DATA_SIZE,
-				BORDER_DATA_SIZE);
+		
 		JPanel jPanel = new JPanel(new BorderLayout());
 		jPanel.setBackground(PANEL_COLOR);
-		jPanel.setBorder(panelBorder);
 		jPanel.add(getNameLabel(), BorderLayout.NORTH);
 		jPanel.add(getPriceLabel(), BorderLayout.CENTER);
 		jPanel.add(getQuantityLabel(), BorderLayout.SOUTH);
@@ -93,11 +86,8 @@ public class ProductList extends JPanel implements ProductInterface {
 	@Override
 	public JPanel getButtonComponent() {
 
-		Border panelBorder = new EmptyBorder(BORDER_BUTTON_SIZE, BORDER_BUTTON_SIZE, BORDER_BUTTON_SIZE,
-				BORDER_BUTTTON_RIGHT_SIZE);
 		JPanel jPanel = new JPanel();
 		jPanel.setBackground(PANEL_COLOR);
-		jPanel.setBorder(panelBorder);
 		jPanel.add(getUpdateButton(), BorderLayout.WEST);
 		jPanel.add(getDeleteButton(), BorderLayout.EAST);
 

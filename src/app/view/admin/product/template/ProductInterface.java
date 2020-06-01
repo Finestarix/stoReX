@@ -1,4 +1,4 @@
-package app.view.admin.product.list;
+package app.view.admin.product.template;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;

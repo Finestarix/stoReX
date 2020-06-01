@@ -10,6 +10,10 @@ public class ProductController {
 	public static ArrayList<Product> getAllProduct() {
 		return ProductRepository.getAllProducts();
 	}
+	
+	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem) {
+		return ProductRepository.getProductsAlreadyLoaded(currentLoadedItem);
+	}
 
 	public static ArrayList<Product> getProductsPerPage(int currentPageLoaded) {
 		return ProductRepository.getProductsPerPage(currentPageLoaded);

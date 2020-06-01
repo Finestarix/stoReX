@@ -18,6 +18,14 @@ public class ProductRepository extends Repository<Product> {
 		return Repository.toObject(Product.class, resultSet);
 	}
 
+	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem) {
+		String query = String.format("SELECT * FROM %s LIMIT %d", TABLE_NAME, currentLoadedItem);
+		System.out.println(query);
+		ResultSet result = Repository.executeQuery(query);
+		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
+		return loadedProducts;
+	}
+	
 	public static ArrayList<Product> getProductsPerPage(int currentLoadedPage) {
 		String query = String.format("SELECT * FROM %s LIMIT %d,%d", TABLE_NAME, (currentLoadedPage - 1) * ITEM_LOAD, ITEM_LOAD);
 		System.out.println(query);

@@ -1,34 +1,22 @@
 package app.view.admin.product;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.ScrollPaneLayout;
-import javax.swing.SwingWorker;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import app.controller.ProductController;
 import app.factory.ButtonFactory;
 import app.factory.TextFieldFactory;
-import app.model.Product;
-import app.view.admin.product.list.ProductList;
 import util.ColorHandler;
 import util.FileHandler;
 
@@ -40,29 +28,24 @@ public class ManageProductPanel extends JPanel {
 	private static final int PANEL_TOP_HEIGHT = 40;
 	private static final int BORDER_ZERO = 0;
 	private static final int BORDER_SIZE = 30;
-	private static final int BORDER_SCROLL_SIZE = 10;
 	private final static int BORDER_FIELD_TEXT = 2;
 	private static final int TEXT_FIELD_WIDTH = 690;
 	private static final int TEXT_FIELD_HEIGHT = 40;
-	private static final int SCROLL_WIDTH = 0;
-	private static final int SCROLL_HEIGHT = 530;
 
+	private CardManageProductPanel cardManageProductPanel;
+	
 	private JTextField searchTextField;
 	private JButton listViewButton;
 	private JButton gridViewButton;
 	private JButton addButton;
 	private JButton searchButton;
-	private JPanel productListPanel;
-	private JScrollPane jScrollPane;
-	private JScrollBar jScrollBar;
-	
-	private int currentProductPage = 1;
-	private int totalProductLoaded = 0;
-	
+
 	public ManageProductPanel() {
 		initializePanel();
-		initializeProductListPanel();
 		initializeComponent();
+		
+		getListButton().addActionListener(listActionListener);
+		getGridButton().addActionListener(gridActionListener);
 	}
 
 	private void initializePanel() {
@@ -73,7 +56,7 @@ public class ManageProductPanel extends JPanel {
 
 	private void initializeComponent() {
 		add(initializeTopComponent(), BorderLayout.NORTH);
-		add(jScrollPane, BorderLayout.CENTER);
+		add(getManageProductPanel(), BorderLayout.CENTER);
 	}
 
 	private JPanel initializeTopComponent() {
@@ -144,88 +127,30 @@ public class ManageProductPanel extends JPanel {
 
 		return addButton;
 	}
-
-	private JPanel initializeProductListPanel() {
-		
-		if (productListPanel == null) {
-			GridBagLayout gridBagLayout = new GridBagLayout();
-			productListPanel = new JPanel(gridBagLayout);
-			productListPanel.setOpaque(false);
-			
-			Border panelBorder = new EmptyBorder(BORDER_SCROLL_SIZE, BORDER_SIZE, BORDER_SCROLL_SIZE, BORDER_SIZE);
-			jScrollPane = new JScrollPane(productListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, 
-					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-			jScrollPane.setPreferredSize(new Dimension(SCROLL_WIDTH, SCROLL_HEIGHT));
-			jScrollPane.getVerticalScrollBar().setUnitIncrement(25);
-			jScrollPane.setBackground(PANEL_COLOR);
-			jScrollPane.setLayout(new ScrollPaneLayout());
-			jScrollPane.getViewport().setBackground(PANEL_COLOR);
-			jScrollPane.setBorder(panelBorder);
-			
-			jScrollBar = jScrollPane.getVerticalScrollBar();
-			jScrollBar.addAdjustmentListener(adjustmentListener);
-			refreshPanel();
-		}
-		
-		return productListPanel;
-	}
 	
-	private void refreshPanel() {
-		totalProductLoaded = ProductController.getTotalProduct();
-		new ProductFetcher().execute();
+	private CardManageProductPanel getManageProductPanel() {
+		if (cardManageProductPanel == null)
+			cardManageProductPanel = new CardManageProductPanel();
+
+		return cardManageProductPanel;
 	}
-		
-	private AdjustmentListener adjustmentListener = new AdjustmentListener() {
-		
+
+	private ActionListener listActionListener = new ActionListener() {
+
 		@Override
-		public void adjustmentValueChanged(AdjustmentEvent e) {
-			int totalComponentLoaded = ManageProductPanel.this.initializeProductListPanel().getComponentCount();
-			if (!e.getValueIsAdjusting() &&
-					e.getValue() == jScrollBar.getMaximum() - jScrollBar.getVisibleAmount() &&
-					totalComponentLoaded != totalProductLoaded) {
-				currentProductPage++;
-				refreshPanel();
-			}
+		public void actionPerformed(ActionEvent e) {
+			CardLayout cardLayout = cardManageProductPanel.getCardLayout();
+			cardLayout.show(cardManageProductPanel, CardManageProductPanel.VIEW_LIST_PANEL);
+		}
+	};
+
+	private ActionListener gridActionListener = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			CardLayout cardLayout = cardManageProductPanel.getCardLayout();
+			cardLayout.show(cardManageProductPanel, CardManageProductPanel.VIEW_GRID_PANEL);
 		}
 	};
 	
-	public class ProductFetcher extends SwingWorker<Void, Product> {
-
-		private GridBagConstraints gridBagConstraints;
-		
-		public ProductFetcher() {
-			gridBagConstraints = new GridBagConstraints();
-			gridBagConstraints.gridx = 0;
-			gridBagConstraints.fill = GridBagConstraints.BOTH;
-		}
-		
-		@Override
-		protected Void doInBackground() throws Exception {			
-			ArrayList<Product> products = null;
-			products = ProductController.getProductsPerPage(currentProductPage);
-			for(Product product : products) 
-				publish(product);
-			return null;
-		}
-		
-		@Override
-		protected void process(List<Product> chunks) {
-			for (int i = 0 ; i < chunks.size() ; i++) {
-				Product product = chunks.get(i);
-				ProductList productList = new ProductList(product, () -> {
-					refreshPanel();
-					return null;
-				});
-				initializeProductListPanel().add(productList, gridBagConstraints);
-			}
-		}
-		
-		@Override
-		protected void done() {
-			initializeProductListPanel().revalidate();
-			initializeProductListPanel().repaint();
-		}
-		
-	}
-
 }
