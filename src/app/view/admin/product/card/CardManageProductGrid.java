@@ -69,13 +69,13 @@ public class CardManageProductGrid extends JPanel {
 	}
 
 	public void refreshPanel(boolean isRefresh, boolean isAdd) {
-		
+
 		if (isAdd)
 			totalComponentLoaded++;
-		
+
 		if (isRefresh)
 			initializeProductListPanel().removeAll();
-		
+
 		totalProduct = ProductController.getTotalProduct();
 		new ProductFetcher(isRefresh).execute();
 	}
@@ -84,7 +84,7 @@ public class CardManageProductGrid extends JPanel {
 
 		@Override
 		public void adjustmentValueChanged(AdjustmentEvent e) {
-			
+
 			totalComponentLoaded = CardManageProductGrid.this.initializeProductListPanel().getComponentCount();
 			totalProduct = ProductController.getTotalProduct();
 
@@ -132,5 +132,5 @@ public class CardManageProductGrid extends JPanel {
 		}
 
 	}
-	
+
 }

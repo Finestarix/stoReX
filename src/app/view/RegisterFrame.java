@@ -24,9 +24,9 @@ import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
 import app.validator.Validator;
-import app.validator.rule.EmailRule;
-import app.validator.rule.NameRule;
-import app.validator.rule.PasswordRule;
+import app.validator.rule.UserEmailRule;
+import app.validator.rule.UserNameRule;
+import app.validator.rule.UserPasswordRule;
 import app.validator.rule.parent.Rule;
 import util.ColorHandler;
 import util.FileHandler;
@@ -249,9 +249,9 @@ public class RegisterFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			Rule nameField = new NameRule(getNameTextField());
-			Rule emailField = new EmailRule(getEmailTextField());
-			Rule passwordField = new PasswordRule(getPasswordTextField());
+			Rule nameField = new UserNameRule(getNameTextField());
+			Rule emailField = new UserEmailRule(getEmailTextField());
+			Rule passwordField = new UserPasswordRule(getPasswordTextField());
 
 			if (Validator.validate(nameField, emailField, passwordField)) {
 				

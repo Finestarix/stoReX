@@ -7,30 +7,30 @@ import javax.swing.JTextField;
 
 import app.validator.rule.parent.Rule;
 
-public class EmailRule implements Rule {
+public class UserPasswordRule implements Rule{
 
 	private JTextField jTextField;
 
-	public EmailRule(JTextField jTextField) {
+	public UserPasswordRule(JTextField jTextField) {
 		this.jTextField = jTextField;
 	}
 
 	@Override
 	public String validate() {
-		String email = this.jTextField.getText();
+		String password = this.jTextField.getText();
 
-		if (email.isEmpty())
-			return "Email must be filled.";
+		if (password.isEmpty())
+			return "Password must be filled.";
 
 		else {
-			String regex = "^(.+)@(.+)$";
+			String regex = "^[a-zA-Z0-9]+$";
 			Pattern pattern = Pattern.compile(regex);
-			Matcher matcher = pattern.matcher(email);
+			Matcher matcher = pattern.matcher(password);
 			if (!matcher.matches())
-				return "Email must be in email format.";
+				return "Password must be alphanumeric.";
 		}
 
 		return "";
 	}
-
+	
 }

@@ -20,8 +20,10 @@ import javax.swing.border.MatteBorder;
 
 import app.controller.ProductController;
 import app.factory.ButtonFactory;
+import app.factory.DialogFactory;
 import app.factory.LabelFactory;
 import app.model.Product;
+import app.view.admin.product.dialog.DialogUpdateProduct;
 import util.ColorHandler;
 import util.FileHandler;
 import util.MessageHandler;
@@ -46,6 +48,7 @@ public class ProductGrid extends JPanel implements ProductInterface {
 
 	private Callable<Void> refreshCallable;
 
+	private DialogUpdateProduct dialogUpdateProduct;
 	private Product product;
 
 	public ProductGrid(Product product, Callable<Void> refreshCallable) {
@@ -169,7 +172,18 @@ public class ProductGrid extends JPanel implements ProductInterface {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				refreshCallable.call();
+				dialogUpdateProduct = new DialogUpdateProduct(product);
+				dialogUpdateProduct.setCallable(() -> {
+					refreshCallable.call();
+					dialogUpdateProduct.close();
+					if (dialogUpdateProduct.getDialogResult() == DialogFactory.CONFIRM) {
+						String message = "Update success !";
+						MessageHandler.success(message);
+					}
+					return null;				
+				});
+				
+				dialogUpdateProduct.setVisible(true);
 			} catch (Exception exception) {
 			}
 		}
@@ -193,7 +207,6 @@ public class ProductGrid extends JPanel implements ProductInterface {
 
 					refreshCallable.call();
 				}
-
 			} catch (Exception exception) {
 			}
 		}

@@ -21,6 +21,7 @@ import app.factory.ButtonFactory;
 import app.factory.DialogFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
+import app.model.Product;
 import app.validator.Validator;
 import app.validator.rule.ProductNameRule;
 import app.validator.rule.ProductPriceRule;
@@ -30,7 +31,7 @@ import util.ColorHandler;
 import util.MessageHandler;
 
 @SuppressWarnings("serial")
-public class DialogAddProduct extends DialogFactory implements AutoCloseable {
+public class DialogUpdateProduct extends DialogFactory implements AutoCloseable {
 
 	private static final int BORDER_WEIGHT = 10;
 	private static final Color FRAME_COLOR = Color.WHITE;
@@ -43,15 +44,19 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 	private JTextField txtPrice;
 	private JLabel lblQuantity;
 	private JTextField txtQuantity;
-	private JButton btnAdd;
+	private JButton btnUpdate;
 	private JButton btnCancel;
 
 	private Callable<Void> callable;
+	
+	private Product product;
 
-	public DialogAddProduct() {
+	public DialogUpdateProduct(Product product) {
+		this.product = product;
+		
 		initializeComponent();
 
-		getAddButton().addActionListener(addActionListener);
+		getUpdateButton().addActionListener(updateActionListener);
 		getCancelButton().addActionListener(cancelActionListener);
 	}
 
@@ -102,10 +107,10 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 		jPanel.add(quantityPanel, gridBagConstraints);
 
 		/**
-		 * Add Button
+		 * Update Button
 		 */
 		setAddConstraint(gridBagConstraints);
-		jPanel.add(getAddButton(), gridBagConstraints);
+		jPanel.add(getUpdateButton(), gridBagConstraints);
 
 		/**
 		 * Cancel Button
@@ -159,8 +164,10 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 	}
 
 	private JTextField getNameTextField() {
-		if (txtName == null)
+		if (txtName == null) {
 			txtName = TextFieldFactory.getInstance().create(false, null);
+			txtName.setText(product.getName());
+		}
 
 		return txtName;
 	}
@@ -173,8 +180,10 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 	}
 
 	private JTextField getPriceTextField() {
-		if (txtPrice == null)
+		if (txtPrice == null) {
 			txtPrice = TextFieldFactory.getInstance().create(false, null);
+			txtPrice.setText(Integer.toString(product.getPrice()));
+		}
 
 		return txtPrice;
 	}
@@ -187,17 +196,19 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 	}
 
 	private JTextField getQuantityTextField() {
-		if (txtQuantity == null)
+		if (txtQuantity == null) {
 			txtQuantity = TextFieldFactory.getInstance().create(false, null);
+			txtQuantity.setText(Integer.toString(product.getQuantity()));
+		}
 
 		return txtQuantity;
 	}
 
-	private JButton getAddButton() {
-		if (btnAdd == null)
-			btnAdd = ButtonFactory.getInstance().create("Add");
+	private JButton getUpdateButton() {
+		if (btnUpdate == null)
+			btnUpdate = ButtonFactory.getInstance().create("Update");
 
-		return btnAdd;
+		return btnUpdate;
 	}
 
 	private JButton getCancelButton() {
@@ -212,7 +223,7 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 		this.dispose();
 	}
 
-	private ActionListener addActionListener = new ActionListener() {
+	private ActionListener updateActionListener = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -224,15 +235,19 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 
 				if (Validator.validate(nameField, priceField, quantityField)) {
 	
-					getAddButton().setEnabled(false);
+					getUpdateButton().setEnabled(false);
 					getCancelButton().setEnabled(false);
 
 					String name = getNameTextField().getText();
 					String price = getPriceTextField().getText();
 					String quantity = getQuantityTextField().getText();
 
-					ProductController.insertNewProduct(name, Integer.parseInt(price), Integer.parseInt(quantity));
-					DialogAddProduct.this.dialogResult = DialogFactory.CONFIRM;
+					product.setName(name);
+					product.setPrice(Integer.parseInt(price));
+					product.setQuantity(Integer.parseInt(quantity));
+					
+					ProductController.updateProduct(product);
+					DialogUpdateProduct.this.dialogResult = DialogFactory.CONFIRM;
 					callable.call();
 					
 				} else {
@@ -250,8 +265,8 @@ public class DialogAddProduct extends DialogFactory implements AutoCloseable {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {
-				DialogAddProduct.this.dialogResult = DialogFactory.CANCEL;
-				DialogAddProduct.this.close();
+				DialogUpdateProduct.this.dialogResult = DialogFactory.CANCEL;
+				DialogUpdateProduct.this.close();
 			} catch (Exception exception) {
 			}
 

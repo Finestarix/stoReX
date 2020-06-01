@@ -27,8 +27,8 @@ import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
 import app.model.User;
 import app.validator.Validator;
-import app.validator.rule.EmailRule;
-import app.validator.rule.PasswordRule;
+import app.validator.rule.UserEmailRule;
+import app.validator.rule.UserPasswordRule;
 import app.validator.rule.parent.Rule;
 import app.view.admin.MainFrame;
 import app.view.user.UserMainFrame;
@@ -269,8 +269,8 @@ public class LoginFrame extends JFrame {
 			getEmailTextField().setText("renaldy@storex.com");
 			getPasswordTextField().setText("storex123");
 			
-			Rule emailField = new EmailRule(getEmailTextField());
-			Rule passwordField = new PasswordRule(getPasswordTextField());
+			Rule emailField = new UserEmailRule(getEmailTextField());
+			Rule passwordField = new UserPasswordRule(getPasswordTextField());
 
 			if (Validator.validate(emailField, passwordField)) {
 				getLoginButton().setText("Authenticating");

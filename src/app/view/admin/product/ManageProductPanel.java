@@ -42,7 +42,7 @@ public class ManageProductPanel extends JPanel {
 	private JButton gridViewButton;
 	private JButton addButton;
 	private JButton searchButton;
-	
+
 	private DialogAddProduct dialogAddProduct;
 
 	public ManageProductPanel() {
@@ -146,21 +146,21 @@ public class ManageProductPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			ManageProductPanel.this.dialogAddProduct = new DialogAddProduct();
+			dialogAddProduct = new DialogAddProduct();
 			dialogAddProduct.setCallable(() -> {
 				cardManageProductPanel.getCardManageProductGrid().refreshPanel(true, true);
 				cardManageProductPanel.getCardManageProductList().refreshPanel(true, true);
-				
+
 				ManageProductPanel.this.dialogAddProduct.close();
-				
+
 				if (ManageProductPanel.this.dialogAddProduct.getDialogResult() == DialogFactory.CONFIRM) {
 					String message = "Insert success !";
 					MessageHandler.success(message);
 				}
-				
-				return null;				
+
+				return null;
 			});
-			
+
 			dialogAddProduct.setVisible(true);
 		}
 	};

@@ -7,11 +7,11 @@ import javax.swing.JTextField;
 
 import app.validator.rule.parent.Rule;
 
-public class NameRule implements Rule {
+public class UserNameRule implements Rule {
 
 	private JTextField jTextField;
 
-	public NameRule(JTextField jTextField) {
+	public UserNameRule(JTextField jTextField) {
 		this.jTextField = jTextField;
 	}
 

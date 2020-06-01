@@ -22,8 +22,6 @@ public class ProductRepository extends Repository<Product> {
 		String query = String.format("SELECT * FROM %s ORDER BY created_at LIMIT %d", TABLE_NAME, currentLoadedItem);
 		ResultSet result = Repository.executeQuery(query);
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
-
-		System.out.println("Loaded");
 		return loadedProducts;
 	}
 
@@ -42,7 +40,6 @@ public class ProductRepository extends Repository<Product> {
 			result.next();
 			return result.getInt(1);
 		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 
 		return -1;
@@ -57,7 +54,7 @@ public class ProductRepository extends Repository<Product> {
 	public static void updateProduct(Product product) {
 		String query = String.format("UPDATE %s SET name = ?, price = ?, quantity = ? WHERE id LIKE ?", TABLE_NAME);
 		ProductRepository.executeUpdate(query, product.getName(), Integer.toString(product.getPrice()),
-				Integer.toString(product.getQuantity()));
+				Integer.toString(product.getQuantity()), product.getId());
 	}
 
 	public static void deleteProduct(Product product) {
