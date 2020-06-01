@@ -4,12 +4,12 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
-import app.view.admin.card.AdminCardHome;
-import app.view.admin.card.AdminCardManageProduct;
-import app.view.admin.card.AdminCardManageUser;
+import app.view.admin.product.ManageProductPanel;
+import app.view.admin.user.AdminCardManageUser;
+import app.view.admin.user.card.AdminCardHome;
 
 @SuppressWarnings("serial")
-public class AdminCardPanel extends JPanel {
+public class CardMainFrame extends JPanel {
 
 	public final static String HOME_PANEL = "Home Panel";
 	public final static String MANAGE_PRODUCT_PANEL = "Manage Product Panel";
@@ -17,14 +17,14 @@ public class AdminCardPanel extends JPanel {
 	
 	private CardLayout cardLayout;
 	
-	public AdminCardPanel() {
+	public CardMainFrame() {
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
 		
 		AdminCardHome adminHome = new AdminCardHome();
 		this.add(adminHome, HOME_PANEL);
 		
-		AdminCardManageProduct adminManageProduct = new AdminCardManageProduct();
+		ManageProductPanel adminManageProduct = new ManageProductPanel();
 		this.add(adminManageProduct, MANAGE_PRODUCT_PANEL);
 		
 		AdminCardManageUser adminManageUser = new AdminCardManageUser();

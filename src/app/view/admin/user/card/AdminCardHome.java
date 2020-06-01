@@ -1,4 +1,4 @@
-package app.view.admin.card;
+package app.view.admin.user.card;
 
 import javax.swing.JPanel;
 

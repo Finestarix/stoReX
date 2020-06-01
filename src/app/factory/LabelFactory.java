@@ -2,6 +2,7 @@ package app.factory;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 
 import javax.swing.JLabel;
 
@@ -33,11 +34,16 @@ public class LabelFactory {
 		jLabel.setOpaque(true);
 	}
 	
-	public JLabel create(String text) {
+	public JLabel create(String text, boolean isBold) {
 		JLabel jLabel = new JLabel();
 		jLabel.setText(text);
 		
 		setDefaultStyle(jLabel);
+		
+		if (isBold) {
+			Font font = new Font("Dialog", Font.BOLD, 14);
+			jLabel.setFont(font);
+		}
 		
 		return jLabel;
 	}

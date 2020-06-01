@@ -39,7 +39,7 @@ public class RegisterFrame extends JFrame {
 	private static final Color FRAME_COLOR = Color.WHITE;
 	private static final int FRAME_WIDTH = 500;
 	private static final int FRAME_HEIGHT = 350;
-	private static final int PANEL_TITLE_BORDER = 10;
+	private static final int BORDER_WEIGHT = 10;
 
 	private Insets insets;
 
@@ -77,7 +77,7 @@ public class RegisterFrame extends JFrame {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-		insets = new Insets(PANEL_TITLE_BORDER, PANEL_TITLE_BORDER, PANEL_TITLE_BORDER, PANEL_TITLE_BORDER);
+		insets = new Insets(BORDER_WEIGHT, BORDER_WEIGHT, BORDER_WEIGHT, BORDER_WEIGHT);
 		JPanel jPanel = new JPanel(gridBagLayout);
 		jPanel.setBackground(FRAME_COLOR);
 		jPanel.setBorder(new EmptyBorder(insets));
@@ -190,7 +190,7 @@ public class RegisterFrame extends JFrame {
 	
 	private JLabel getNameLabel() {
 		if (lblName == null)
-			lblName = LabelFactory.getInstance().create("Name");
+			lblName = LabelFactory.getInstance().create("Name", false);
 
 		return lblName;
 	}
@@ -204,7 +204,7 @@ public class RegisterFrame extends JFrame {
 
 	private JLabel getEmailLabel() {
 		if (lblEmail == null)
-			lblEmail = LabelFactory.getInstance().create("Email");
+			lblEmail = LabelFactory.getInstance().create("Email", false);
 
 		return lblEmail;
 	}
@@ -218,7 +218,7 @@ public class RegisterFrame extends JFrame {
 
 	private JLabel getPasswordLabel() {
 		if (lblPassword == null)
-			lblPassword = LabelFactory.getInstance().create("Password");
+			lblPassword = LabelFactory.getInstance().create("Password", false);
 
 		return lblPassword;
 	}
@@ -232,7 +232,7 @@ public class RegisterFrame extends JFrame {
 
 	private JButton getRegisterButton() {
 		if (btnRegister == null)
-			btnRegister = ButtonFactory.getInstance().create("Register", false);
+			btnRegister = ButtonFactory.getInstance().create("Register");
 
 		return btnRegister;
 	}
@@ -244,7 +244,7 @@ public class RegisterFrame extends JFrame {
 		return lblLogin;
 	}
 	
-	ActionListener registerActionListener = new ActionListener() {
+	private ActionListener registerActionListener = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -277,7 +277,7 @@ public class RegisterFrame extends JFrame {
 		}
 	};
 
-	MouseAdapter loginMouseAdapter = new MouseAdapter() {
+	private MouseAdapter loginMouseAdapter = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			RegisterFrame.this.dispose();

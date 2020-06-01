@@ -10,7 +10,7 @@ public class UserRepository extends Repository<User> {
 
 	private static final String TABLE_NAME = "users";
 
-	private final static ArrayList<User> users = new ArrayList<User>();
+	private static final ArrayList<User> users = new ArrayList<User>();
 
 	public static ArrayList<User> getUserByEmailAndPassword(String email, String password) {
 		String query = String.format("SELECT * FROM %s WHERE email=? AND password=?", TABLE_NAME);

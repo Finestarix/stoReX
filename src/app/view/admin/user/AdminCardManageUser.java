@@ -1,4 +1,4 @@
-package app.view.admin.card;
+package app.view.admin.user;
 
 import java.awt.Color;
 import java.awt.Dimension;

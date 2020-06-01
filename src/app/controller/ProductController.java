@@ -1,18 +1,21 @@
 package app.controller;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import app.model.Product;
-import app.model.User;
-import app.repository.UserRepository;
-import app.repository.parent.Repository;
+import app.repository.ProductRepository;
 
 public class ProductController {
 
-	private static final String TABLE_NAME = "products";
+	public static ArrayList<Product> getAllProduct() {
+		return ProductRepository.getAllProducts();
+	}
 
-	private final static ArrayList<Product> products = new ArrayList<Product>();
-	
-	
+	public static ArrayList<Product> getProductsPerPage(int currentPageLoaded) {
+		return ProductRepository.getProductsPerPage(currentPageLoaded);
+	}
+
+	public static int getTotalProduct() {
+		return ProductRepository.getTotalProduct();
+	}
 }

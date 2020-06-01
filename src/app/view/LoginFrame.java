@@ -30,7 +30,7 @@ import app.validator.Validator;
 import app.validator.rule.EmailRule;
 import app.validator.rule.PasswordRule;
 import app.validator.rule.parent.Rule;
-import app.view.admin.AdminMainFrame;
+import app.view.admin.MainFrame;
 import app.view.user.UserMainFrame;
 import util.ColorHandler;
 import util.FileHandler;
@@ -43,7 +43,7 @@ public class LoginFrame extends JFrame {
 	private static final Color FRAME_COLOR = Color.WHITE;
 	private static final int FRAME_WIDTH = 500;
 	private static final int FRAME_HEIGHT = 300;
-	private static final int PANEL_TITLE_BORDER = 10;
+	private static final int BORDER_WEIGHT = 10;
 
 	private Insets insets;
 
@@ -56,7 +56,7 @@ public class LoginFrame extends JFrame {
 	private JLabel lblRegister;
 
 	private UserMainFrame userMainFrame;
-	private AdminMainFrame adminMainFrame;
+	private MainFrame adminMainFrame;
 	private RegisterFrame registerFrame;
 
 	public LoginFrame() {
@@ -82,7 +82,7 @@ public class LoginFrame extends JFrame {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-		insets = new Insets(PANEL_TITLE_BORDER, PANEL_TITLE_BORDER, PANEL_TITLE_BORDER, PANEL_TITLE_BORDER);
+		insets = new Insets(BORDER_WEIGHT, BORDER_WEIGHT, BORDER_WEIGHT, BORDER_WEIGHT);
 		JPanel jPanel = new JPanel(gridBagLayout);
 		jPanel.setBackground(FRAME_COLOR);
 		jPanel.setBorder(new EmptyBorder(insets));
@@ -177,7 +177,7 @@ public class LoginFrame extends JFrame {
 
 	private JLabel getEmailLabel() {
 		if (lblEmail == null)
-			lblEmail = LabelFactory.getInstance().create("Email");
+			lblEmail = LabelFactory.getInstance().create("Email", false);
 
 		return lblEmail;
 	}
@@ -191,7 +191,7 @@ public class LoginFrame extends JFrame {
 
 	private JLabel getPasswordLabel() {
 		if (lblPassword == null)
-			lblPassword = LabelFactory.getInstance().create("Password");
+			lblPassword = LabelFactory.getInstance().create("Password", false);
 
 		return lblPassword;
 	}
@@ -205,7 +205,7 @@ public class LoginFrame extends JFrame {
 
 	private JButton getLoginButton() {
 		if (btnLogin == null)
-			btnLogin = ButtonFactory.getInstance().create("Login", false);
+			btnLogin = ButtonFactory.getInstance().create("Login");
 
 		return btnLogin;
 	}
@@ -230,11 +230,11 @@ public class LoginFrame extends JFrame {
 		return userMainFrame;
 	}
 
-	private AdminMainFrame getAdminMainFrame() {
+	private MainFrame getAdminMainFrame() {
 		LoginFrame.this.setVisible(false);
 
 		if (adminMainFrame == null) {
-			adminMainFrame = new AdminMainFrame();
+			adminMainFrame = new MainFrame();
 			adminMainFrame.setVisible(true);
 			adminMainFrame.addWindowListener(showLoginWindowAdapter);
 		} else
@@ -256,7 +256,7 @@ public class LoginFrame extends JFrame {
 		return userMainFrame;
 	}
 
-	ActionListener loginActionListener = new ActionListener() {
+	private ActionListener loginActionListener = new ActionListener() {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -304,14 +304,14 @@ public class LoginFrame extends JFrame {
 		}
 	};
 
-	MouseAdapter registerMouseAdapter = new MouseAdapter() {
+	private MouseAdapter registerMouseAdapter = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			getRegisterFrame();
 		}
 	};
 
-	WindowAdapter showLoginWindowAdapter = new WindowAdapter() {
+	private WindowAdapter showLoginWindowAdapter = new WindowAdapter() {
 		@Override
 		public void windowClosed(WindowEvent e) {
 			LoginFrame.this.setVisible(true);

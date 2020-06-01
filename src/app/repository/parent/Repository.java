@@ -68,18 +68,17 @@ public abstract class Repository<T> {
 
 		try {
 			while (resultSet.next()) {
-
+				
 				T classType = type.newInstance();
-
 				Field[] fields = classType.getClass().getDeclaredFields();
-
+				
 				for (Field field : fields) {
 					
 					field.setAccessible(true);
 					FieldDatabase fieldDatabase = field.getAnnotation(FieldDatabase.class);
 					String fieldName = fieldDatabase.name();
 					Object value = resultSet.getObject(fieldName);
-
+					
 					Class<?> fieldType = field.getType();
 
 					if (isPrimitive(fieldType)) {
