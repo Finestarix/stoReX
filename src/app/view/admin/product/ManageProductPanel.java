@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -17,6 +18,7 @@ import javax.swing.border.MatteBorder;
 
 import app.factory.ButtonFactory;
 import app.factory.DialogFactory;
+import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
 import app.view.admin.product.dialog.DialogAddProduct;
 import util.ColorHandler;
@@ -37,6 +39,7 @@ public class ManageProductPanel extends JPanel {
 
 	private CardManageProductPanel cardManageProductPanel;
 
+	private JLabel titleLabel;
 	private JTextField searchTextField;
 	private JButton listViewButton;
 	private JButton gridViewButton;
@@ -78,13 +81,23 @@ public class ManageProductPanel extends JPanel {
 		jPanel.setBackground(PANEL_COLOR);
 		jPanel.setPreferredSize(dimension);
 		jPanel.setBorder(panelBorder);
-		jPanel.add(getSearchTextField(), BorderLayout.WEST);
-		jPanel.add(getSearchButton(), BorderLayout.CENTER);
 		jPanel.add(eastPanel, BorderLayout.EAST);
+		jPanel.add(getTitleLabel(), BorderLayout.CENTER);
+		
+//		jPanel.add(getSearchTextField(), BorderLayout.WEST);
+//		jPanel.add(getSearchButton(), BorderLayout.CENTER);
 
 		return jPanel;
 	}
 
+	private JLabel getTitleLabel() {
+		if (titleLabel == null)
+			titleLabel = LabelFactory.getInstance().create("View Product", true);
+		
+		return titleLabel;
+	}
+	
+	@SuppressWarnings("unused")
 	private JTextField getSearchTextField() {
 		if (searchTextField == null) {
 			Dimension dimension = new Dimension(TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT);
@@ -98,6 +111,7 @@ public class ManageProductPanel extends JPanel {
 		return searchTextField;
 	}
 
+	@SuppressWarnings("unused")
 	private JButton getSearchButton() {
 		if (searchButton == null) {
 			ImageIcon imageIconSearch = new ImageIcon(FileHandler.getAssetsPath("search-icon.png"));
@@ -135,8 +149,10 @@ public class ManageProductPanel extends JPanel {
 	}
 
 	private CardManageProductPanel getManageProductPanel() {
-		if (cardManageProductPanel == null)
+		if (cardManageProductPanel == null) {
 			cardManageProductPanel = new CardManageProductPanel();
+			cardManageProductPanel.setBackground(PANEL_COLOR);
+		}
 
 		return cardManageProductPanel;
 	}
@@ -171,6 +187,7 @@ public class ManageProductPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			CardLayout cardLayout = cardManageProductPanel.getCardLayout();
 			cardLayout.show(cardManageProductPanel, CardManageProductPanel.VIEW_LIST_PANEL);
+			cardManageProductPanel.getCardManageProductList().setBackground(PANEL_COLOR);
 		}
 	};
 
@@ -180,6 +197,7 @@ public class ManageProductPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			CardLayout cardLayout = cardManageProductPanel.getCardLayout();
 			cardLayout.show(cardManageProductPanel, CardManageProductPanel.VIEW_GRID_PANEL);
+			cardManageProductPanel.getCardManageProductGrid().setBackground(PANEL_COLOR);
 		}
 	};
 

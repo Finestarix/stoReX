@@ -7,12 +7,12 @@ import java.awt.Label;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class AdminCardManageUser extends JPanel {
+public class ManageUserPanel extends JPanel {
 
 	private static final int PANEL_HEIGHT = 550;
 	private static final int PANEL_WIDTH = 900;
 	
-	public AdminCardManageUser() {
+	public ManageUserPanel() {
 		initializeComponent();
 	}
 

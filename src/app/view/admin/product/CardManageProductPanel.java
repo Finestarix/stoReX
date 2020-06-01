@@ -21,10 +21,10 @@ public class CardManageProductPanel extends JPanel {
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
 		
-		cardManageProductList = new CardManageProductList();
+		cardManageProductList = new CardManageProductList(this);
 		this.add(cardManageProductList, VIEW_LIST_PANEL);
 		
-		cardManageProductGrid = new CardManageProductGrid();
+		cardManageProductGrid = new CardManageProductGrid(this);
 		this.add(cardManageProductGrid, VIEW_GRID_PANEL);
 	}
 

@@ -17,6 +17,7 @@ import javax.swing.SwingWorker;
 
 import app.controller.ProductController;
 import app.model.Product;
+import app.view.admin.product.CardManageProductPanel;
 import app.view.admin.product.template.ProductGrid;
 
 @SuppressWarnings("serial")
@@ -34,7 +35,11 @@ public class CardManageProductGrid extends JPanel {
 	private int currentProductPage = 1;
 	private int totalProduct = 0;
 
-	public CardManageProductGrid() {
+	private CardManageProductPanel cardManageProductPanel;
+	
+	public CardManageProductGrid(CardManageProductPanel cardManageProductPanel) {
+		this.cardManageProductPanel = cardManageProductPanel;
+		
 		initializePanel();
 		initializeProductListPanel();
 		add(jScrollPane);
@@ -42,7 +47,7 @@ public class CardManageProductGrid extends JPanel {
 
 	private void initializePanel() {
 		setOpaque(false);
-		setBackground(Color.BLACK);
+		setBackground(PANEL_COLOR);
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 	}
 
@@ -50,6 +55,7 @@ public class CardManageProductGrid extends JPanel {
 
 		if (productListPanel == null) {
 			productListPanel = new JPanel(new GridLayout(0, 4));
+			productListPanel.setBackground(PANEL_COLOR);
 			productListPanel.setOpaque(false);
 
 			jScrollPane = new JScrollPane(productListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -118,7 +124,8 @@ public class CardManageProductGrid extends JPanel {
 			for (int i = 0; i < chunks.size(); i++) {
 				Product product = chunks.get(i);
 				ProductGrid productList = new ProductGrid(product, () -> {
-					refreshPanel(true, false);
+					cardManageProductPanel.getCardManageProductGrid().refreshPanel(true, false);
+					cardManageProductPanel.getCardManageProductList().refreshPanel(true, false);
 					return null;
 				});
 				initializeProductListPanel().add(productList);

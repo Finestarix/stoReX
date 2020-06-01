@@ -4,9 +4,9 @@ import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
+import app.view.admin.home.HomePanel;
 import app.view.admin.product.ManageProductPanel;
-import app.view.admin.user.AdminCardManageUser;
-import app.view.admin.user.card.AdminCardHome;
+import app.view.admin.user.ManageUserPanel;
 
 @SuppressWarnings("serial")
 public class CardMainFrame extends JPanel {
@@ -21,13 +21,13 @@ public class CardMainFrame extends JPanel {
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
 		
-		AdminCardHome adminHome = new AdminCardHome();
+		HomePanel adminHome = new HomePanel();
 		this.add(adminHome, HOME_PANEL);
 		
 		ManageProductPanel adminManageProduct = new ManageProductPanel();
 		this.add(adminManageProduct, MANAGE_PRODUCT_PANEL);
 		
-		AdminCardManageUser adminManageUser = new AdminCardManageUser();
+		ManageUserPanel adminManageUser = new ManageUserPanel();
 		this.add(adminManageUser, MANAGE_USER_PANEL);
 	}
 

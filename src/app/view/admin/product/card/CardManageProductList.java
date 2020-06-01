@@ -18,6 +18,7 @@ import javax.swing.SwingWorker;
 
 import app.controller.ProductController;
 import app.model.Product;
+import app.view.admin.product.CardManageProductPanel;
 import app.view.admin.product.template.ProductList;
 
 @SuppressWarnings("serial")
@@ -34,8 +35,12 @@ public class CardManageProductList extends JPanel {
 	private int totalComponentLoaded = 0;
 	private int currentProductPage = 1;
 	private int totalProduct = 0;
+	
+	private CardManageProductPanel cardManageProductPanel;
 
-	public CardManageProductList() {
+	public CardManageProductList(CardManageProductPanel cardManageProductPanel) {
+		this.cardManageProductPanel = cardManageProductPanel;
+		
 		initializePanel();
 		initializeProductListPanel();
 		add(jScrollPane);
@@ -43,7 +48,7 @@ public class CardManageProductList extends JPanel {
 
 	private void initializePanel() {
 		setOpaque(false);
-		setBackground(Color.BLACK);
+		setBackground(PANEL_COLOR);
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 	}
 
@@ -52,6 +57,7 @@ public class CardManageProductList extends JPanel {
 		if (productListPanel == null) {
 			GridBagLayout gridBagLayout = new GridBagLayout();
 			productListPanel = new JPanel(gridBagLayout);
+			productListPanel.setBackground(PANEL_COLOR);
 			productListPanel.setOpaque(false);
 
 			jScrollPane = new JScrollPane(productListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -126,7 +132,8 @@ public class CardManageProductList extends JPanel {
 			for (int i = 0; i < chunks.size(); i++) {
 				Product product = chunks.get(i);
 				ProductList productList = new ProductList(product, () -> {
-					refreshPanel(true, false);
+					cardManageProductPanel.getCardManageProductGrid().refreshPanel(true, false);
+					cardManageProductPanel.getCardManageProductList().refreshPanel(true, false);
 					return null;
 				});
 				initializeProductListPanel().add(productList, gridBagConstraints);
