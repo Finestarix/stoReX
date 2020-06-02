@@ -1,4 +1,4 @@
-package app.view.admin.product.card;
+package app.view.admin.user.card;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,32 +16,33 @@ import javax.swing.ScrollPaneLayout;
 import javax.swing.SwingWorker;
 
 import app.controller.ProductController;
-import app.model.Product;
-import app.view.admin.product.CardManageProductPanel;
-import app.view.admin.product.template.ProductGrid;
+import app.controller.UserController;
+import app.model.User;
+import app.view.admin.user.CardManageUserPanel;
+import app.view.admin.user.template.UserGrid;
 
 @SuppressWarnings("serial")
-public class CardManageProductGrid extends JPanel {
+public class CardManageUserGrid extends JPanel {
 
 	private static final Color PANEL_COLOR = Color.WHITE;
 	private static final int PANEL_WIDTH = 840;
 	private static final int PANEL_HEIGHT = 500;
 
-	private JPanel productListPanel;
+	private JPanel userGridPanel;
 	private JScrollPane jScrollPane;
 	private JScrollBar jScrollBar;
 
 	private int totalComponentLoaded = 0;
-	private int currentProductPage = 1;
-	private int totalProduct = 0;
+	private int currentUserPage = 1;
+	private int totalUser = 0;
 
-	private CardManageProductPanel cardManageProductPanel;
+	private CardManageUserPanel cardManageUserPanel;
 	
-	public CardManageProductGrid(CardManageProductPanel cardManageProductPanel) {
-		this.cardManageProductPanel = cardManageProductPanel;
+	public CardManageUserGrid(CardManageUserPanel cardManageUserPanel) {
+		this.cardManageUserPanel = cardManageUserPanel;
 		
 		initializePanel();
-		initializeProductGridPanel();
+		initializeUserGridPanel();
 		add(jScrollPane);
 	}
 
@@ -51,14 +52,14 @@ public class CardManageProductGrid extends JPanel {
 		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 	}
 
-	private JPanel initializeProductGridPanel() {
+	private JPanel initializeUserGridPanel() {
 
-		if (productListPanel == null) {
-			productListPanel = new JPanel(new GridLayout(0, 4));
-			productListPanel.setBackground(PANEL_COLOR);
-			productListPanel.setOpaque(false);
+		if (userGridPanel == null) {
+			userGridPanel = new JPanel(new GridLayout(0, 4));
+			userGridPanel.setBackground(PANEL_COLOR);
+			userGridPanel.setOpaque(false);
 
-			jScrollPane = new JScrollPane(productListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			jScrollPane = new JScrollPane(userGridPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			jScrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 			jScrollPane.getVerticalScrollBar().setUnitIncrement(25);
@@ -71,7 +72,7 @@ public class CardManageProductGrid extends JPanel {
 			refreshPanel(false, false);
 		}
 
-		return productListPanel;
+		return userGridPanel;
 	}
 
 	public void refreshPanel(boolean isRefresh, boolean isAdd) {
@@ -80,10 +81,10 @@ public class CardManageProductGrid extends JPanel {
 			totalComponentLoaded++;
 
 		if (isRefresh)
-			initializeProductGridPanel().removeAll();
+			initializeUserGridPanel().removeAll();
 
-		totalProduct = ProductController.getTotalProduct();
-		new ProductFetcher(isRefresh).execute();
+		totalUser = ProductController.getTotalProduct();
+		new UserFetcher(isRefresh).execute();
 	}
 
 	private AdjustmentListener adjustmentListener = new AdjustmentListener() {
@@ -91,53 +92,53 @@ public class CardManageProductGrid extends JPanel {
 		@Override
 		public void adjustmentValueChanged(AdjustmentEvent e) {
 
-			totalComponentLoaded = CardManageProductGrid.this.initializeProductGridPanel().getComponentCount();
-			totalProduct = ProductController.getTotalProduct();
+			totalComponentLoaded = initializeUserGridPanel().getComponentCount();
+			totalUser = UserController.getTotalUser();
 
 			if (!e.getValueIsAdjusting() && e.getValue() == jScrollBar.getMaximum() - jScrollBar.getVisibleAmount()
-					&& totalComponentLoaded < totalProduct) {
-				currentProductPage++;
+					&& totalComponentLoaded < totalUser) {
+				currentUserPage++;
 				refreshPanel(false, false);
 			}
 		}
 	};
 
-	public class ProductFetcher extends SwingWorker<Void, Product> {
+	public class UserFetcher extends SwingWorker<Void, User> {
 
 		private boolean isRefresh;
 
-		public ProductFetcher(boolean isRefresh) {
+		public UserFetcher(boolean isRefresh) {
 			this.isRefresh = isRefresh;
 		}
 
 		@Override
 		protected Void doInBackground() throws Exception {
-			ArrayList<Product> products = (!isRefresh) ? ProductController.getProductsPerPage(currentProductPage)
-					: ProductController.getProductsAlreadyLoaded(CardManageProductGrid.this.totalComponentLoaded);
-			for (Product product : products)
-				publish(product);
+			ArrayList<User> users = (!isRefresh) ? UserController.getUsersPerPage(currentUserPage)
+					: UserController.getUsersAlreadyLoaded(totalComponentLoaded);
+			for (User user : users)
+				publish(user);
 			return null;
 		}
 
 		@Override
-		protected void process(List<Product> chunks) {
+		protected void process(List<User> chunks) {
 			for (int i = 0; i < chunks.size(); i++) {
-				Product product = chunks.get(i);
-				ProductGrid productGrid = new ProductGrid(product, () -> {
-					cardManageProductPanel.getCardManageProductGrid().refreshPanel(true, false);
-					cardManageProductPanel.getCardManageProductList().refreshPanel(true, false);
+				User user = chunks.get(i);
+				UserGrid userGrid = new UserGrid(user, () -> {
+					cardManageUserPanel.getCardManageUserGrid().refreshPanel(true, false);
+					cardManageUserPanel.getCardManageUserList().refreshPanel(true, false);
 					return null;
 				});
-				initializeProductGridPanel().add(productGrid);
+				initializeUserGridPanel().add(userGrid);
 			}
 		}
 
 		@Override
 		protected void done() {
-			initializeProductGridPanel().revalidate();
-			initializeProductGridPanel().repaint();
+			initializeUserGridPanel().revalidate();
+			initializeUserGridPanel().repaint();
 		}
 
 	}
-
+	
 }

@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import app.factory.ButtonFactory;
@@ -31,8 +29,6 @@ public class ManageProductPanel extends JPanel {
 	private static final Color PANEL_COLOR = Color.WHITE;
 	private static final int PANEL_WIDTH = 800;
 	private static final int PANEL_TOP_HEIGHT = 40;
-	private static final int BORDER_ZERO = 0;
-	private static final int BORDER_SIZE = 30;
 	private final static int BORDER_FIELD_TEXT = 2;
 	private static final int TEXT_FIELD_WIDTH = 690;
 	private static final int TEXT_FIELD_HEIGHT = 40;
@@ -76,11 +72,9 @@ public class ManageProductPanel extends JPanel {
 		eastPanel.add(getListButton(), BorderLayout.WEST);
 
 		Dimension dimension = new Dimension(PANEL_WIDTH, PANEL_TOP_HEIGHT);
-		Border panelBorder = new EmptyBorder(BORDER_ZERO, BORDER_SIZE, BORDER_ZERO, BORDER_SIZE);
 		JPanel jPanel = new JPanel(new BorderLayout());
 		jPanel.setBackground(PANEL_COLOR);
 		jPanel.setPreferredSize(dimension);
-		jPanel.setBorder(panelBorder);
 		jPanel.add(eastPanel, BorderLayout.EAST);
 		jPanel.add(getTitleLabel(), BorderLayout.CENTER);
 		

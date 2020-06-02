@@ -32,7 +32,7 @@ import util.MessageHandler;
 public class ProductGrid extends JPanel implements ProductInterface {
 
 	private static final int PANEL_WIDTH = 840 / 4;
-	private static final int PANEL_HEIGHT = 110;
+	private static final int PANEL_HEIGHT = 80;
 	private static final int BORDER_SIZE = 1;
 	private static final int BORDER_ALL_TOP = 0;
 	private static final int BORDER_ALL_BOTTOM = 0;
