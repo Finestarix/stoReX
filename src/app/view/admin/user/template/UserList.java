@@ -20,8 +20,8 @@ import app.controller.UserController;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.model.User;
+import session.ImageCaching;
 import util.ColorHandler;
-import util.FileHandler;
 import util.MessageHandler;
 
 @SuppressWarnings("serial")
@@ -58,7 +58,7 @@ public class UserList extends JPanel implements UserInterface {
 	public void initializePanel() {
 		Dimension dimension = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
 		Border panelBorder = new MatteBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE,
-				ColorHandler.getColor(ColorHandler.PRIMARY_DANGER));
+				ColorHandler.getColor(ColorHandler.PRIMARY_SECONDARY));
 
 		setOpaque(false);
 		setLayout(new BorderLayout());
@@ -123,7 +123,7 @@ public class UserList extends JPanel implements UserInterface {
 	@Override
 	public JButton getBannedButton() {
 		if (bannedButton == null) {
-			ImageIcon imageIconBanned = new ImageIcon(FileHandler.getAssetsPath("banned-icon.png"));
+			ImageIcon imageIconBanned = ImageCaching.getBannedIcon();
 			bannedButton = ButtonFactory.getInstance().create(imageIconBanned, true);
 		}
 

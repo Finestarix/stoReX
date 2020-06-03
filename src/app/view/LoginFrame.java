@@ -30,10 +30,11 @@ import app.validator.Validator;
 import app.validator.rule.UserEmailRule;
 import app.validator.rule.UserPasswordRule;
 import app.validator.rule.parent.Rule;
-import app.view.admin.MainFrame;
+import app.view.admin.AdminMainFrame;
 import app.view.user.UserMainFrame;
+import session.ImageCaching;
+import session.UserSession;
 import util.ColorHandler;
-import util.FileHandler;
 import util.MessageHandler;
 
 @SuppressWarnings("serial")
@@ -56,7 +57,7 @@ public class LoginFrame extends JFrame {
 	private JLabel lblRegister;
 
 	private UserMainFrame userMainFrame;
-	private MainFrame adminMainFrame;
+	private AdminMainFrame adminMainFrame;
 	private RegisterFrame registerFrame;
 
 	public LoginFrame() {
@@ -74,7 +75,7 @@ public class LoginFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 
-		ImageIcon frameIcon = new ImageIcon(FileHandler.getAssetsPath("logo-small.png"));
+		ImageIcon frameIcon = ImageCaching.getLogoSmallIcon();
 		setIconImage(frameIcon.getImage());
 	}
 
@@ -169,7 +170,7 @@ public class LoginFrame extends JFrame {
 	private JLabel getLogoLabel() {
 		if (lblLogo == null) {
 			lblLogo = new JLabel();
-			lblLogo.setIcon(new ImageIcon(FileHandler.getAssetsPath("logo.png")));
+			lblLogo.setIcon(ImageCaching.getLogoIcon());
 		}
 
 		return lblLogo;
@@ -212,7 +213,7 @@ public class LoginFrame extends JFrame {
 
 	private JLabel getRegisterLabel() {
 		if (lblRegister == null)
-			lblRegister = LabelFactory.getInstance().create("Register Here", ColorHandler.PRIMARY_DANGER, true);
+			lblRegister = LabelFactory.getInstance().create("Register Here", ColorHandler.PRIMARY_SECONDARY, true);
 
 		return lblRegister;
 	}
@@ -230,11 +231,11 @@ public class LoginFrame extends JFrame {
 		return userMainFrame;
 	}
 
-	private MainFrame getAdminMainFrame() {
+	private AdminMainFrame getAdminMainFrame() {
 		LoginFrame.this.setVisible(false);
 
 		if (adminMainFrame == null) {
-			adminMainFrame = new MainFrame();
+			adminMainFrame = new AdminMainFrame();
 			adminMainFrame.setVisible(true);
 			adminMainFrame.addWindowListener(showLoginWindowAdapter);
 		} else
@@ -291,6 +292,8 @@ public class LoginFrame extends JFrame {
 				getEmailTextField().setText("");
 				getPasswordTextField().setText("");
 
+				UserSession.setUser(user);
+				
 				if (user.getRole().equals("User"))
 					getUserMainFrame();
 				else if (user.getRole().equals("Admin"))

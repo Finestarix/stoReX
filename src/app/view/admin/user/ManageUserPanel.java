@@ -17,8 +17,8 @@ import javax.swing.border.MatteBorder;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
+import session.ImageCaching;
 import util.ColorHandler;
-import util.FileHandler;
 
 @SuppressWarnings("serial")
 public class ManageUserPanel extends JPanel {
@@ -100,7 +100,7 @@ public class ManageUserPanel extends JPanel {
 	@SuppressWarnings("unused")
 	private JButton getSearchButton() {
 		if (searchButton == null) {
-			ImageIcon imageIconSearch = new ImageIcon(FileHandler.getAssetsPath("search-icon.png"));
+			ImageIcon imageIconSearch = ImageCaching.getSearchIcon();
 			searchButton = ButtonFactory.getInstance().create(imageIconSearch, false);
 		}
 
@@ -109,7 +109,7 @@ public class ManageUserPanel extends JPanel {
 
 	private JButton getListButton() {
 		if (listViewButton == null) {
-			ImageIcon imageIconList = new ImageIcon(FileHandler.getAssetsPath("list-view-icon.png"));
+			ImageIcon imageIconList = ImageCaching.getListViewIcon();
 			listViewButton = ButtonFactory.getInstance().create(imageIconList, true);
 		}
 
@@ -118,7 +118,7 @@ public class ManageUserPanel extends JPanel {
 
 	private JButton getGridButton() {
 		if (gridViewButton == null) {
-			ImageIcon imageIconGrid = new ImageIcon(FileHandler.getAssetsPath("grid-view-icon.png"));
+			ImageIcon imageIconGrid = ImageCaching.getGridViewIcon();
 			gridViewButton = ButtonFactory.getInstance().create(imageIconGrid, true);
 		}
 

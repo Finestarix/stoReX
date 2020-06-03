@@ -213,7 +213,7 @@ public class DialogUpdateProduct extends DialogFactory implements AutoCloseable 
 
 	private JButton getCancelButton() {
 		if (btnCancel == null)
-			btnCancel = ButtonFactory.getInstance().create("Cancel", ColorHandler.PRIMARY_DANGER);
+			btnCancel = ButtonFactory.getInstance().create("Cancel", ColorHandler.PRIMARY_SECONDARY);
 
 		return btnCancel;
 	}

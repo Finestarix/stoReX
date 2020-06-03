@@ -24,8 +24,8 @@ import app.factory.DialogFactory;
 import app.factory.LabelFactory;
 import app.model.Product;
 import app.view.admin.product.dialog.DialogUpdateProduct;
+import session.ImageCaching;
 import util.ColorHandler;
-import util.FileHandler;
 import util.MessageHandler;
 
 @SuppressWarnings("serial")
@@ -66,7 +66,7 @@ public class ProductList extends JPanel implements ProductInterface {
 	public void initializePanel() {
 		Dimension dimension = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
 		Border panelBorder = new MatteBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE,
-				ColorHandler.getColor(ColorHandler.PRIMARY_DANGER));
+				ColorHandler.getColor(ColorHandler.PRIMARY_SECONDARY));
 
 		setOpaque(false);
 		setLayout(new BorderLayout());
@@ -152,7 +152,7 @@ public class ProductList extends JPanel implements ProductInterface {
 	@Override
 	public JButton getUpdateButton() {
 		if (updateButton == null) {
-			ImageIcon imageIconUpdate = new ImageIcon(FileHandler.getAssetsPath("update-icon.png"));
+			ImageIcon imageIconUpdate = ImageCaching.getUpdateIcon();
 			updateButton = ButtonFactory.getInstance().create(imageIconUpdate, true);
 		}
 
@@ -162,7 +162,7 @@ public class ProductList extends JPanel implements ProductInterface {
 	@Override
 	public JButton getDeleteButton() {
 		if (deleteButton == null) {
-			ImageIcon imageIconDelete = new ImageIcon(FileHandler.getAssetsPath("delete-icon.png"));
+			ImageIcon imageIconDelete = ImageCaching.getDeleteIcon();
 			deleteButton = ButtonFactory.getInstance().create(imageIconDelete, true);
 		}
 

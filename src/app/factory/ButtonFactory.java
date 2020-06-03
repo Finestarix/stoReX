@@ -4,13 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import util.ColorHandler;
+import util.ImageHandler;
 
 public class ButtonFactory {
 
@@ -71,12 +71,6 @@ public class ButtonFactory {
 		jButton.setPreferredSize(dimension);
 	}
 	
-	private ImageIcon getIcon(ImageIcon icon) {
-		Image image = icon.getImage();
-		image = image.getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH);
-		return new ImageIcon(image);
-	}
-	
 	public JButton create(String text) {
 		JButton jButton = new JButton();
 		jButton.setText(text);
@@ -99,7 +93,7 @@ public class ButtonFactory {
 			setListStyle(jButton);
 		else
 			setSmallStyle(jButton);
-		jButton.setIcon(getIcon(imageIcon));
+		jButton.setIcon(ImageHandler.getNewIconSize(imageIcon, ICON_SIZE, ICON_SIZE));
 		return jButton;
 	}
 	
@@ -115,7 +109,7 @@ public class ButtonFactory {
 		jLabel.setForeground(DEFAULT_COLOR);
 		
 		JLabel jLabelIcon = new JLabel();
-		jLabelIcon.setIcon(getIcon(imageIcon));
+		jLabelIcon.setIcon(ImageHandler.getNewIconSize(imageIcon, ICON_SIZE, ICON_SIZE));
 		
 		jButton.add(jLabel, BorderLayout.EAST);
 		jButton.add(jLabelIcon, BorderLayout.WEST);

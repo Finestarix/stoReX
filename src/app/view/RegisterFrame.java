@@ -28,8 +28,8 @@ import app.validator.rule.UserEmailRule;
 import app.validator.rule.UserNameRule;
 import app.validator.rule.UserPasswordRule;
 import app.validator.rule.parent.Rule;
+import session.ImageCaching;
 import util.ColorHandler;
-import util.FileHandler;
 import util.MessageHandler;
 
 @SuppressWarnings("serial")
@@ -69,7 +69,7 @@ public class RegisterFrame extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
 		
-		ImageIcon frameIcon = new ImageIcon(FileHandler.getAssetsPath("logo-small.png"));
+		ImageIcon frameIcon = ImageCaching.getLogoSmallIcon();
 		setIconImage(frameIcon.getImage());
 	}
 	
@@ -182,7 +182,7 @@ public class RegisterFrame extends JFrame {
 	private JLabel getLogoLabel() {
 		if (lblLogo == null) {
 			lblLogo = new JLabel();
-			lblLogo.setIcon(new ImageIcon(FileHandler.getAssetsPath("logo.png")));
+			lblLogo.setIcon(ImageCaching.getLogoIcon());
 		}
 
 		return lblLogo;
@@ -239,7 +239,7 @@ public class RegisterFrame extends JFrame {
 
 	private JLabel getLoginLabel() {
 		if (lblLogin == null)
-			lblLogin = LabelFactory.getInstance().create("Back to Login", ColorHandler.PRIMARY_DANGER, true);
+			lblLogin = LabelFactory.getInstance().create("Back to Login", ColorHandler.PRIMARY_SECONDARY, true);
 
 		return lblLogin;
 	}

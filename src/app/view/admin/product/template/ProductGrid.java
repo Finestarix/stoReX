@@ -24,15 +24,15 @@ import app.factory.DialogFactory;
 import app.factory.LabelFactory;
 import app.model.Product;
 import app.view.admin.product.dialog.DialogUpdateProduct;
+import session.ImageCaching;
 import util.ColorHandler;
-import util.FileHandler;
 import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class ProductGrid extends JPanel implements ProductInterface {
 
 	private static final int PANEL_WIDTH = 840 / 4;
-	private static final int PANEL_HEIGHT = 80;
+	private static final int PANEL_HEIGHT = 110;
 	private static final int BORDER_SIZE = 1;
 	private static final int BORDER_ALL_TOP = 0;
 	private static final int BORDER_ALL_BOTTOM = 0;
@@ -67,7 +67,7 @@ public class ProductGrid extends JPanel implements ProductInterface {
 
 		Dimension dimension = new Dimension(PANEL_WIDTH, PANEL_HEIGHT);
 		Border panelBorder = new MatteBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE,
-				ColorHandler.getColor(ColorHandler.PRIMARY_DANGER));
+				ColorHandler.getColor(ColorHandler.PRIMARY_SECONDARY));
 
 		setOpaque(false);
 		setLayout(new BorderLayout());
@@ -150,7 +150,7 @@ public class ProductGrid extends JPanel implements ProductInterface {
 	@Override
 	public JButton getUpdateButton() {
 		if (updateButton == null) {
-			ImageIcon imageIconUpdate = new ImageIcon(FileHandler.getAssetsPath("update-icon.png"));
+			ImageIcon imageIconUpdate = ImageCaching.getUpdateIcon();
 			updateButton = ButtonFactory.getInstance().create(imageIconUpdate, true);
 		}
 
@@ -160,7 +160,7 @@ public class ProductGrid extends JPanel implements ProductInterface {
 	@Override
 	public JButton getDeleteButton() {
 		if (deleteButton == null) {
-			ImageIcon imageIconDelete = new ImageIcon(FileHandler.getAssetsPath("delete-icon.png"));
+			ImageIcon imageIconDelete = ImageCaching.getDeleteIcon();
 			deleteButton = ButtonFactory.getInstance().create(imageIconDelete, true);
 		}
 
@@ -180,9 +180,9 @@ public class ProductGrid extends JPanel implements ProductInterface {
 						String message = "Update success !";
 						MessageHandler.success(message);
 					}
-					return null;				
+					return null;
 				});
-				
+
 				dialogUpdateProduct.setVisible(true);
 			} catch (Exception exception) {
 			}

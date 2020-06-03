@@ -18,21 +18,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import app.factory.ButtonFactory;
-import util.FileHandler;
+import session.ImageCaching;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class AdminMainFrame extends JFrame {
 
 	private static final String FRAME_TITLE = "stoReX Admin Page";
 	private static final Color FRAME_COLOR = Color.WHITE;
 	private static final int FRAME_WIDTH = 900;
 	private static final int FRAME_HEIGHT = 700;
-	
+
 	private static final int PANEL_TOP_LOGO_WEIGHT = 90;
-	
+
 	private static final int PANEL_TOP_WIDTH = 850;
 	private static final int PANEL_TOP_HEIGHT = 90;
-	
+
 	private static final int PANEL_TOP_BORDER_ZERO = 0;
 	private static final int PANEL_TOP_BORDER_HEIGHT = 15;
 
@@ -43,7 +43,7 @@ public class MainFrame extends JFrame {
 	private JButton productButton;
 	private JButton logoutButton;
 
-	public MainFrame() {
+	public AdminMainFrame() {
 		initializeFrame();
 		initializeComponent();
 
@@ -57,11 +57,11 @@ public class MainFrame extends JFrame {
 		setTitle(FRAME_TITLE);
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setLocationRelativeTo(null);
-		// TODO: Change This		
+		// TODO: Change This
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 
-		ImageIcon frameIcon = new ImageIcon(FileHandler.getAssetsPath("logo-small.png"));
+		ImageIcon frameIcon = ImageCaching.getLogoSmallIcon();
 		setIconImage(frameIcon.getImage());
 	}
 
@@ -76,7 +76,8 @@ public class MainFrame extends JFrame {
 
 	private JPanel getTopComponent() {
 		JPanel eastPanel = new JPanel(new FlowLayout());
-		Insets eastPanelInsets = new Insets(PANEL_TOP_BORDER_HEIGHT, PANEL_TOP_BORDER_ZERO, PANEL_TOP_BORDER_ZERO, PANEL_TOP_BORDER_ZERO);
+		Insets eastPanelInsets = new Insets(PANEL_TOP_BORDER_HEIGHT, PANEL_TOP_BORDER_ZERO, PANEL_TOP_BORDER_ZERO,
+				PANEL_TOP_BORDER_ZERO);
 		eastPanel.setBackground(FRAME_COLOR);
 		eastPanel.setBorder(new EmptyBorder(eastPanelInsets));
 		eastPanel.add(getHomeButton());
@@ -95,9 +96,9 @@ public class MainFrame extends JFrame {
 
 	private JLabel getLogoLabel() {
 		if (lblLogo == null) {
-			Image imageLogo = new ImageIcon(FileHandler.getAssetsPath("logo.png")).getImage();
+			Image imageLogo = ImageCaching.getLogoIcon().getImage();
 			imageLogo = imageLogo.getScaledInstance(PANEL_TOP_LOGO_WEIGHT, PANEL_TOP_LOGO_WEIGHT, Image.SCALE_SMOOTH);
-			
+
 			lblLogo = new JLabel();
 			lblLogo.setIcon(new ImageIcon(imageLogo));
 		}
@@ -107,7 +108,7 @@ public class MainFrame extends JFrame {
 
 	private JButton getHomeButton() {
 		if (homeButton == null) {
-			ImageIcon imageIconHome = new ImageIcon(FileHandler.getAssetsPath("home-icon.png"));
+			ImageIcon imageIconHome = ImageCaching.getHomeIcon();
 			homeButton = ButtonFactory.getInstance().create("Home", imageIconHome);
 		}
 
@@ -116,7 +117,7 @@ public class MainFrame extends JFrame {
 
 	private JButton getUserButton() {
 		if (userButton == null) {
-			ImageIcon imageIconUser = new ImageIcon(FileHandler.getAssetsPath("manage-user-icon.png"));
+			ImageIcon imageIconUser = ImageCaching.getManageUserIcon();
 			userButton = ButtonFactory.getInstance().create("Manage User", imageIconUser);
 		}
 
@@ -125,7 +126,7 @@ public class MainFrame extends JFrame {
 
 	private JButton getProductButton() {
 		if (productButton == null) {
-			ImageIcon imageIconProduct = new ImageIcon(FileHandler.getAssetsPath("manage-product-icon.png"));
+			ImageIcon imageIconProduct = ImageCaching.getManageProductIcon();
 			productButton = ButtonFactory.getInstance().create("Manage Product", imageIconProduct);
 		}
 
@@ -134,7 +135,7 @@ public class MainFrame extends JFrame {
 
 	private JButton getLogoutButton() {
 		if (logoutButton == null) {
-			ImageIcon imageIconLogout = new ImageIcon(FileHandler.getAssetsPath("logout-icon.png"));			
+			ImageIcon imageIconLogout = ImageCaching.getLogoutIcon();
 			logoutButton = ButtonFactory.getInstance().create("Logout", imageIconLogout);
 		}
 
@@ -156,7 +157,7 @@ public class MainFrame extends JFrame {
 			cardLayout.show(cardMainFrame, CardMainFrame.HOME_PANEL);
 		}
 	};
-	
+
 	private ActionListener userActionListener = new ActionListener() {
 
 		@Override
@@ -179,7 +180,7 @@ public class MainFrame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			MainFrame.this.dispose();
+			AdminMainFrame.this.dispose();
 		}
 	};
 

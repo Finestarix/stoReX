@@ -19,8 +19,8 @@ import app.factory.DialogFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
 import app.view.admin.product.dialog.DialogAddProduct;
+import session.ImageCaching;
 import util.ColorHandler;
-import util.FileHandler;
 import util.MessageHandler;
 
 @SuppressWarnings("serial")
@@ -108,7 +108,7 @@ public class ManageProductPanel extends JPanel {
 	@SuppressWarnings("unused")
 	private JButton getSearchButton() {
 		if (searchButton == null) {
-			ImageIcon imageIconSearch = new ImageIcon(FileHandler.getAssetsPath("search-icon.png"));
+			ImageIcon imageIconSearch = ImageCaching.getSearchIcon();
 			searchButton = ButtonFactory.getInstance().create(imageIconSearch, false);
 		}
 
@@ -117,7 +117,7 @@ public class ManageProductPanel extends JPanel {
 
 	private JButton getListButton() {
 		if (listViewButton == null) {
-			ImageIcon imageIconList = new ImageIcon(FileHandler.getAssetsPath("list-view-icon.png"));
+			ImageIcon imageIconList = ImageCaching.getListViewIcon();
 			listViewButton = ButtonFactory.getInstance().create(imageIconList, true);
 		}
 
@@ -126,7 +126,7 @@ public class ManageProductPanel extends JPanel {
 
 	private JButton getGridButton() {
 		if (gridViewButton == null) {
-			ImageIcon imageIconGrid = new ImageIcon(FileHandler.getAssetsPath("grid-view-icon.png"));
+			ImageIcon imageIconGrid = ImageCaching.getGridViewIcon();
 			gridViewButton = ButtonFactory.getInstance().create(imageIconGrid, true);
 		}
 
@@ -135,7 +135,7 @@ public class ManageProductPanel extends JPanel {
 
 	private JButton getAddButton() {
 		if (addButton == null) {
-			ImageIcon imageIconAdd = new ImageIcon(FileHandler.getAssetsPath("add-icon.png"));
+			ImageIcon imageIconAdd = ImageCaching.getAddIcon();
 			addButton = ButtonFactory.getInstance().create(imageIconAdd, true);
 		}
 

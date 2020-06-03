@@ -131,7 +131,6 @@ public class CardManageUserList extends JPanel {
 		protected void process(List<User> chunks) {
 			for (int i = 0; i < chunks.size(); i++) {
 				User user = chunks.get(i);
-				System.err.println(user.getName());
 				UserList userList = new UserList(user, () -> {
 					cardManageUserPanel.getCardManageUserGrid().refreshPanel(true, false);
 					cardManageUserPanel.getCardManageUserList().refreshPanel(true, false);
