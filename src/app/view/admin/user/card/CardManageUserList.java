@@ -60,7 +60,7 @@ public class CardManageUserList extends JPanel {
 			userListPanel.setBackground(PANEL_COLOR);
 			userListPanel.setOpaque(false);
 
-			jScrollPane = new JScrollPane(userListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			jScrollPane = new JScrollPane(userListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			jScrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 			jScrollPane.getVerticalScrollBar().setUnitIncrement(25);

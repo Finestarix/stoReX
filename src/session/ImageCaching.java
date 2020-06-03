@@ -16,6 +16,7 @@ public class ImageCaching {
 	private static ImageIcon homeIcon;
 	private static ImageIcon manageProductIcon;
 	private static ImageIcon manageUserIcon;
+	private static ImageIcon viewCartIcon;
 	private static ImageIcon logoutIcon;
 
 	private static ImageIcon addIcon;
@@ -66,6 +67,13 @@ public class ImageCaching {
 			manageUserIcon = new ImageIcon(FileHandler.getAssetsPath("manage-user-icon.png"));
 		
 		return manageUserIcon;
+	}
+	
+	public static ImageIcon getViewCartIcon() {
+		if (viewCartIcon == null)
+			viewCartIcon = new ImageIcon(FileHandler.getAssetsPath("view-cart-icon.png"));
+		
+		return viewCartIcon;
 	}
 
 	public static ImageIcon getLogoutIcon() {

@@ -57,8 +57,7 @@ public class AdminMainFrame extends JFrame {
 		setTitle(FRAME_TITLE);
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		setLocationRelativeTo(null);
-		// TODO: Change This
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setResizable(false);
 
 		ImageIcon frameIcon = ImageCaching.getLogoSmallIcon();

@@ -8,6 +8,7 @@ import app.view.user.cart.ViewCartPanel;
 import app.view.user.home.HomePanel;
 import app.view.user.product.ViewProductPanel;
 
+@SuppressWarnings("serial")
 public class CardMainFrame extends JPanel {
 
 	public final static String HOME_PANEL = "Home Panel";

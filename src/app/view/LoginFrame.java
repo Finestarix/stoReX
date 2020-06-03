@@ -263,28 +263,28 @@ public class LoginFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			// User			
-//			getEmailTextField().setText("rey@storex.com");
-//			getPasswordTextField().setText("rey123");
+			getEmailTextField().setText("anglie.yanto@storex.com");
+			getPasswordTextField().setText("storex123");
 
 			// Admin
-			getEmailTextField().setText("renaldy@storex.com");
-			getPasswordTextField().setText("storex123");
+//			getEmailTextField().setText("renaldy@storex.com");
+//			getPasswordTextField().setText("storex123");
 			
 			Rule emailField = new UserEmailRule(getEmailTextField());
 			Rule passwordField = new UserPasswordRule(getPasswordTextField());
 
 			if (Validator.validate(emailField, passwordField)) {
-				getLoginButton().setText("Authenticating");
-
 				String email = getEmailTextField().getText();
 				String password = getPasswordTextField().getText();
 
 				User user = UserController.auth(email, password);
-
-				getLoginButton().setText("Login");
-
+				
 				if (user == null) {
 					String errorMessage = "Invalid email and password.";
+					MessageHandler.error(errorMessage);
+					return;
+				} else if(user.getStatus().equals("Passive")) {
+					String errorMessage = "The admin removed you from this application.";
 					MessageHandler.error(errorMessage);
 					return;
 				}

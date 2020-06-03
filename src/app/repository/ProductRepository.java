@@ -24,11 +24,27 @@ public class ProductRepository extends Repository<Product> {
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
 		return loadedProducts;
 	}
+	
+	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem, String searchCondition) {
+		String query = String.format("SELECT * FROM %s WHERE name LIKE ? ORDER BY created_at LIMIT %d", TABLE_NAME, currentLoadedItem);
+		ResultSet result = Repository.executeQuery(query, "%" + searchCondition + "%");
+		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
+		return loadedProducts;
+	}
 
 	public static ArrayList<Product> getProductsPerPage(int currentLoadedPage) {
 		String query = String.format("SELECT * FROM %s ORDER BY created_at LIMIT %d,%d", TABLE_NAME,
 				(currentLoadedPage - 1) * ITEM_LOAD, ITEM_LOAD);
 		ResultSet result = Repository.executeQuery(query);
+		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
+		return loadedProducts;
+	}
+	
+	public static ArrayList<Product> getProductsPerPage(int currentLoadedPage, String searchCondition) {
+		String query = String.format("SELECT * FROM %s WHERE name LIKE ? ORDER BY created_at LIMIT %d,%d", TABLE_NAME,
+				(currentLoadedPage - 1) * ITEM_LOAD, ITEM_LOAD);
+		System.out.println(query);
+		ResultSet result = Repository.executeQuery(query, "%" + searchCondition + "%");
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
 		return loadedProducts;
 	}
@@ -44,6 +60,19 @@ public class ProductRepository extends Repository<Product> {
 
 		return -1;
 	}
+	
+	public static int getTotalProduct(String searchCondition) {
+		try {
+			String query = String.format("SELECT COUNT(*) FROM %s WHERE name LIKE ?", TABLE_NAME);
+			ResultSet result = Repository.executeQuery(query, "%" + searchCondition + "%");
+			result.next();
+			return result.getInt(1);
+		} catch (SQLException e) {
+		}
+
+		return -1;
+	}
+
 
 	public static void insertProduct(Product product) {
 		String query = String.format("INSERT INTO %s (id, name, price, quantity) VALUES(?, ?, ?, ?)", TABLE_NAME);

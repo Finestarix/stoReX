@@ -19,6 +19,9 @@ public class User {
 	@FieldDatabase(name = "role")
 	private String role;
 
+	@FieldDatabase(name = "status")
+	private String status;
+
 	public User() {
 	}
 
@@ -69,6 +72,14 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

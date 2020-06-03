@@ -60,7 +60,7 @@ public class CardManageProductList extends JPanel {
 			productListPanel.setBackground(PANEL_COLOR);
 			productListPanel.setOpaque(false);
 
-			jScrollPane = new JScrollPane(productListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			jScrollPane = new JScrollPane(productListPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			jScrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 			jScrollPane.getVerticalScrollBar().setUnitIncrement(20);

@@ -15,13 +15,25 @@ public class ProductController {
 	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem) {
 		return ProductRepository.getProductsAlreadyLoaded(currentLoadedItem);
 	}
+	
+	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem, String searchCondition) {
+		return ProductRepository.getProductsAlreadyLoaded(currentLoadedItem, searchCondition);
+	}
 
 	public static ArrayList<Product> getProductsPerPage(int currentPageLoaded) {
 		return ProductRepository.getProductsPerPage(currentPageLoaded);
 	}
+	
+	public static ArrayList<Product> getProductsPerPage(int currentPageLoaded, String searchCondition) {
+		return ProductRepository.getProductsPerPage(currentPageLoaded, searchCondition);
+	}
 
 	public static int getTotalProduct() {
 		return ProductRepository.getTotalProduct();
+	}
+	
+	public static int getTotalProduct(String searchCondition) {
+		return ProductRepository.getTotalProduct(searchCondition);
 	}
 	
 	public static void insertNewProduct(String name, int price, int quantity) {

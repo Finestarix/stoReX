@@ -59,7 +59,7 @@ public class CardManageUserGrid extends JPanel {
 			userGridPanel.setBackground(PANEL_COLOR);
 			userGridPanel.setOpaque(false);
 
-			jScrollPane = new JScrollPane(userGridPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			jScrollPane = new JScrollPane(userGridPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 					ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			jScrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 			jScrollPane.getVerticalScrollBar().setUnitIncrement(25);
