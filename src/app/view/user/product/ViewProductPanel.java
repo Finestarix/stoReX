@@ -35,10 +35,11 @@ import util.ColorHandler;
 public class ViewProductPanel extends JPanel {
 
 	private static final Color PANEL_COLOR = Color.WHITE;
-	private static final int PANEL_WIDTH = 800;
-	private static final int PANEL_HEIGHT = 500;
+	private static final int PANEL_WIDTH = 840;
+	private static final int PANEL_HEIGHT = 400;
 	private final static int BORDER_FIELD_TEXT = 1;
-	private static final int TEXT_FIELD_WIDTH = 690;	private static final int TEXT_FIELD_HEIGHT = 40;
+	private static final int TEXT_FIELD_WIDTH = 690;
+	private static final int TEXT_FIELD_HEIGHT = 40;
 
 	private JTextField searchTextField;
 	private JButton searchButton;
@@ -56,12 +57,12 @@ public class ViewProductPanel extends JPanel {
 		initializeComponent();
 
 		getSearchButton().addActionListener(searchActionListener);
-		
 	}
 
 	private void initializePanel() {
 		setOpaque(false);
 		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 		setBackground(PANEL_COLOR);
 	}
 
@@ -157,11 +158,9 @@ public class ViewProductPanel extends JPanel {
 
 		private GridBagConstraints gridBagConstraints;
 
-		private boolean isRefresh;
 		private String searchCondition;
 
 		public ProductFetcher(boolean isRefresh, String searchCondition) {
-			this.isRefresh = isRefresh;
 			this.searchCondition = searchCondition;
 
 			gridBagConstraints = new GridBagConstraints();
@@ -172,11 +171,9 @@ public class ViewProductPanel extends JPanel {
 		@Override
 		protected Void doInBackground() throws Exception {
 			ArrayList<Product> products = null;
-			if (searchCondition.isEmpty())
-				products = (!isRefresh) ? ProductController.getProductsPerPage(currentProductPage)
-						: ProductController.getProductsAlreadyLoaded(totalComponentLoaded);
-			else
-				products = ProductController.getProductsPerPage(currentProductPage, searchCondition);
+
+			products = (searchCondition.isEmpty()) ? ProductController.getProductsPerPage(currentProductPage)
+					: ProductController.getProductsPerPage(currentProductPage, searchCondition);
 
 			for (Product product : products)
 				publish(product);
@@ -187,10 +184,7 @@ public class ViewProductPanel extends JPanel {
 		protected void process(List<Product> chunks) {
 			for (int i = 0; i < chunks.size(); i++) {
 				Product product = chunks.get(i);
-				ProductList productList = new ProductList(product, () -> {
-					refreshPanel(true);
-					return null;
-				});
+				ProductList productList = new ProductList(product);
 				initializeProductListPanel().add(productList, gridBagConstraints);
 			}
 		}
@@ -211,6 +205,5 @@ public class ViewProductPanel extends JPanel {
 			refreshPanel(true);
 		}
 	};
-
 
 }

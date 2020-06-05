@@ -2,6 +2,7 @@ package app.view.admin.home;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -30,6 +33,7 @@ public class HomePanel extends JPanel {
 	private static final int Y_GAP = 30;
 	private static final int Y_GAP_INSIDE = 15;
 
+	private Insets insets;
 	private JLabel titleHome;
 	private HomeSlider homeSlider;
 	private JLabel descriptionSlider;
@@ -44,12 +48,13 @@ public class HomePanel extends JPanel {
 
 	private void initializePanel() {
 		setOpaque(false);
-		setLayout(new BorderLayout(X_GAP, Y_GAP));
+		setLayout(new BorderLayout());
 		setBackground(PANEL_COLOR);
 	}
 
-	private void initializeComponent() {
-		JPanel jPanel = new JPanel(new BorderLayout(X_GAP, Y_GAP_INSIDE));
+	private void initializeComponent() {		
+		JPanel jPanel = new JPanel(new BorderLayout());
+		jPanel.setBackground(PANEL_COLOR);
 		jPanel.add(getDescriptionLabel(), BorderLayout.CENTER);
 		jPanel.add(getFileUploadButton(), BorderLayout.SOUTH);
 
@@ -60,18 +65,25 @@ public class HomePanel extends JPanel {
 
 	private JLabel getTitleHomeLabel() {
 		if (titleHome == null) {
+			insets = new Insets(Y_GAP_INSIDE, X_GAP, Y_GAP_INSIDE, X_GAP);
+			
 			String message = "Welcome, " + UserSession.getUser().getName() + " (" + UserSession.getUser().getEmail()
 					+ ") as " + UserSession.getUser().getRole();
 			titleHome = LabelFactory.getInstance().create(message, true);
 			titleHome.setHorizontalAlignment(JLabel.CENTER);
+			titleHome.setBorder(new EmptyBorder(insets));
 		}
 
 		return titleHome;
 	}
 
 	private HomeSlider getHomeSlider() {
-		if (homeSlider == null)
+		if (homeSlider == null) {
+			insets = new Insets(Y_GAP, X_GAP, Y_GAP, X_GAP);
+			
 			homeSlider = new HomeSlider();
+			homeSlider.setBorder(new MatteBorder(insets, Color.WHITE));
+		}
 
 		return homeSlider;
 	}

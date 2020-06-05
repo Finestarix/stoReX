@@ -43,7 +43,6 @@ public class ProductRepository extends Repository<Product> {
 	public static ArrayList<Product> getProductsPerPage(int currentLoadedPage, String searchCondition) {
 		String query = String.format("SELECT * FROM %s WHERE name LIKE ? ORDER BY created_at LIMIT %d,%d", TABLE_NAME,
 				(currentLoadedPage - 1) * ITEM_LOAD, ITEM_LOAD);
-		System.out.println(query);
 		ResultSet result = Repository.executeQuery(query, "%" + searchCondition + "%");
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
 		return loadedProducts;

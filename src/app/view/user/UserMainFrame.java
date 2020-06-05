@@ -37,7 +37,8 @@ public class UserMainFrame extends JFrame {
 	private static final int PANEL_TOP_BORDER_ZERO = 0;
 	private static final int PANEL_TOP_BORDER_HEIGHT = 15;
 
-	private CardMainFrame cardMainFrame;
+	public static CardMainFrame cardMainFrame;
+	
 	private JLabel lblLogo;
 	private JButton homeButton;
 	private JButton cartButton;

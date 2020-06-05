@@ -1,6 +1,7 @@
 package app.view.general;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,12 +14,10 @@ import javax.swing.border.MatteBorder;
 
 import app.factory.LabelFactory;
 import session.ImageCaching;
-import util.ColorHandler;
 
 @SuppressWarnings("serial")
 public class HomeSlider extends JPanel {
 
-	private static final int BORDER_WEIGHT = 1;
 	private static final int X_GAP = 10;
 	private static final int Y_GAP = 0;
 
@@ -38,7 +37,7 @@ public class HomeSlider extends JPanel {
 	}
 
 	private void initializePanel() {
-		setLayout(new BorderLayout(X_GAP, Y_GAP));
+		setLayout(new BorderLayout());
 	}
 
 	private void initializeComponent() {
@@ -48,7 +47,7 @@ public class HomeSlider extends JPanel {
 		add(getImageSliderContainer(), BorderLayout.CENTER);
 		add(getNextButton(), BorderLayout.EAST);
 	}
-	
+
 	public void refreshSlider() {
 		imageSliders = ImageCaching.getImageSlider();
 		currentImage = 0;
@@ -56,8 +55,7 @@ public class HomeSlider extends JPanel {
 
 	private JLabel getImageSliderContainer() {
 		if (imageSliderContainer == null) {
-			MatteBorder border = new MatteBorder(BORDER_WEIGHT, BORDER_WEIGHT, BORDER_WEIGHT, BORDER_WEIGHT,
-					ColorHandler.getColor(ColorHandler.PRIMARY_BACKGROUND));
+			MatteBorder border = new MatteBorder(Y_GAP, X_GAP, Y_GAP, X_GAP, Color.WHITE);
 
 			imageSliderContainer = new JLabel();
 			imageSliderContainer.setHorizontalAlignment(JLabel.CENTER);
