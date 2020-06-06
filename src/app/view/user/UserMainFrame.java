@@ -17,9 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import app.controller.CartController;
 import app.factory.ButtonFactory;
+import app.session.ImageCaching;
 import app.view.user.CardMainFrame;
-import session.ImageCaching;
 
 @SuppressWarnings("serial")
 public class UserMainFrame extends JFrame {
@@ -181,6 +182,7 @@ public class UserMainFrame extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			CartController.removeAllCart();
 			dispose();
 		}
 	};

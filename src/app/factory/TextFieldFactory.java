@@ -6,7 +6,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
-import util.ColorHandler;
+import app.util.ColorHandler;
 
 public class TextFieldFactory {
 

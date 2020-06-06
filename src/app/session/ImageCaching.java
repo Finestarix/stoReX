@@ -1,12 +1,12 @@
-package session;
+package app.session;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import util.FileHandler;
-import util.ImageHandler;
+import app.util.FileHandler;
+import app.util.ImageHandler;
 
 public class ImageCaching {
 

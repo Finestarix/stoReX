@@ -19,11 +19,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
+import app.session.UserSession;
+import app.util.ColorHandler;
+import app.util.FileHandler;
+import app.util.MessageHandler;
 import app.view.general.HomeSlider;
-import session.UserSession;
-import util.ColorHandler;
-import util.FileHandler;
-import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class HomePanel extends JPanel {

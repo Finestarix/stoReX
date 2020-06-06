@@ -18,10 +18,10 @@ import app.factory.ButtonFactory;
 import app.factory.DialogFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
+import app.session.ImageCaching;
+import app.util.ColorHandler;
+import app.util.MessageHandler;
 import app.view.admin.product.dialog.DialogAddProduct;
-import session.ImageCaching;
-import util.ColorHandler;
-import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class ManageProductPanel extends JPanel {

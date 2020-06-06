@@ -17,6 +17,12 @@ public class ProductRepository extends Repository<Product> {
 		ResultSet resultSet = Repository.executeQuery(query);
 		return Repository.toObject(Product.class, resultSet);
 	}
+	
+	public static Product getProductByID(String productID) {
+		String query = String.format("SELECT * FROM %s WHERE id LIKE ?", TABLE_NAME);
+		ResultSet resultSet = Repository.executeQuery(query, productID);
+		return Repository.toObject(Product.class, resultSet).get(0);
+	}
 
 	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem) {
 		String query = String.format("SELECT * FROM %s ORDER BY created_at LIMIT %d", TABLE_NAME, currentLoadedItem);
@@ -24,9 +30,10 @@ public class ProductRepository extends Repository<Product> {
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
 		return loadedProducts;
 	}
-	
+
 	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem, String searchCondition) {
-		String query = String.format("SELECT * FROM %s WHERE name LIKE ? ORDER BY created_at LIMIT %d", TABLE_NAME, currentLoadedItem);
+		String query = String.format("SELECT * FROM %s WHERE name LIKE ? ORDER BY created_at LIMIT %d", TABLE_NAME,
+				currentLoadedItem);
 		ResultSet result = Repository.executeQuery(query, "%" + searchCondition + "%");
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
 		return loadedProducts;
@@ -39,7 +46,7 @@ public class ProductRepository extends Repository<Product> {
 		ArrayList<Product> loadedProducts = Repository.toObject(Product.class, result);
 		return loadedProducts;
 	}
-	
+
 	public static ArrayList<Product> getProductsPerPage(int currentLoadedPage, String searchCondition) {
 		String query = String.format("SELECT * FROM %s WHERE name LIKE ? ORDER BY created_at LIMIT %d,%d", TABLE_NAME,
 				(currentLoadedPage - 1) * ITEM_LOAD, ITEM_LOAD);
@@ -59,7 +66,7 @@ public class ProductRepository extends Repository<Product> {
 
 		return -1;
 	}
-	
+
 	public static int getTotalProduct(String searchCondition) {
 		try {
 			String query = String.format("SELECT COUNT(*) FROM %s WHERE name LIKE ?", TABLE_NAME);
@@ -72,7 +79,6 @@ public class ProductRepository extends Repository<Product> {
 		return -1;
 	}
 
-
 	public static void insertProduct(Product product) {
 		String query = String.format("INSERT INTO %s (id, name, price, quantity) VALUES(?, ?, ?, ?)", TABLE_NAME);
 		ProductRepository.executeUpdate(query, product.getId(), product.getName(), Integer.toString(product.getPrice()),
@@ -83,6 +89,11 @@ public class ProductRepository extends Repository<Product> {
 		String query = String.format("UPDATE %s SET name = ?, price = ?, quantity = ? WHERE id LIKE ?", TABLE_NAME);
 		ProductRepository.executeUpdate(query, product.getName(), Integer.toString(product.getPrice()),
 				Integer.toString(product.getQuantity()), product.getId());
+	}
+
+	public static void updateProductDecreaseQuantity(Product product, int decreaseQuantity) {
+		String query = String.format("UPDATE %s SET quantity = ? WHERE id LIKE ?", TABLE_NAME);
+		ProductRepository.executeUpdate(query, Integer.toString(product.getQuantity() - decreaseQuantity), product.getId());
 	}
 
 	public static void deleteProduct(Product product) {

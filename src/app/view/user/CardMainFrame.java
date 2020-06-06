@@ -1,6 +1,7 @@
 package app.view.user;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
@@ -21,16 +22,18 @@ public class CardMainFrame extends JPanel {
 	
 	private CardLayout cardLayout;
 	private ViewCartPanel viewCartPanel;
+	private ViewProductPanel viewProductPanel;
 	
 	public CardMainFrame() {
 		cardLayout = new CardLayout();
 		this.setLayout(cardLayout);
 		this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+		this.setBackground(Color.WHITE);
 		
 		HomePanel userHome = new HomePanel();
 		this.add(userHome, HOME_PANEL);
 		
-		ViewProductPanel viewProductPanel = new ViewProductPanel();
+		viewProductPanel = new ViewProductPanel();
 		this.add(viewProductPanel, VIEW_PRODUCT_PANEL);
 		
 		viewCartPanel = new ViewCartPanel();
@@ -43,6 +46,10 @@ public class CardMainFrame extends JPanel {
 	
 	public ViewCartPanel getViewCartPanel() {
 		return viewCartPanel;
+	}
+	
+	public ViewProductPanel getViewProductPanel() {
+		return viewProductPanel;
 	}
 	
 }

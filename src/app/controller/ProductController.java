@@ -12,6 +12,10 @@ public class ProductController {
 		return ProductRepository.getAllProducts();
 	}
 	
+	public static Product getProductByID(String productID) {
+		return ProductRepository.getProductByID(productID);
+	}
+	
 	public static ArrayList<Product> getProductsAlreadyLoaded(int currentLoadedItem) {
 		return ProductRepository.getProductsAlreadyLoaded(currentLoadedItem);
 	}
@@ -44,6 +48,10 @@ public class ProductController {
 	
 	public static void updateProduct(Product product) {
 		ProductRepository.updateProduct(product);;
+	}
+	
+	public static void updateProductDecreaseQuantity(Product product, int decreaseQuantity) {
+		ProductRepository.updateProductDecreaseQuantity(product, decreaseQuantity);
 	}
 	
 	public static void deleteProduct(Product product) {

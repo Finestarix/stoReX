@@ -1,4 +1,6 @@
-/app/
-/main/
-/session/
 /util/
+/app/
+/session/
+/assets/
+/receipt/
+/receipts/

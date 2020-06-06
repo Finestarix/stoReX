@@ -10,8 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import app.factory.LabelFactory;
+import app.session.UserSession;
 import app.view.general.HomeSlider;
-import session.UserSession;
 
 @SuppressWarnings("serial")
 public class HomePanel extends JPanel {

@@ -23,14 +23,14 @@ import app.controller.UserController;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
+import app.session.ImageCaching;
+import app.util.ColorHandler;
+import app.util.MessageHandler;
 import app.validator.Validator;
 import app.validator.rule.UserEmailRule;
 import app.validator.rule.UserNameRule;
 import app.validator.rule.UserPasswordRule;
 import app.validator.rule.parent.Rule;
-import session.ImageCaching;
-import util.ColorHandler;
-import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class RegisterFrame extends JFrame {

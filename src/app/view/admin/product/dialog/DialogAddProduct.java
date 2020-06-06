@@ -21,13 +21,13 @@ import app.factory.ButtonFactory;
 import app.factory.DialogFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
+import app.util.ColorHandler;
+import app.util.MessageHandler;
 import app.validator.Validator;
 import app.validator.rule.ProductNameRule;
 import app.validator.rule.ProductPriceRule;
 import app.validator.rule.ProductQuantityRule;
 import app.validator.rule.parent.Rule;
-import util.ColorHandler;
-import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class DialogAddProduct extends DialogFactory implements AutoCloseable {

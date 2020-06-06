@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import app.factory.LabelFactory;
-import session.ImageCaching;
+import app.session.ImageCaching;
 
 @SuppressWarnings("serial")
 public class HomeSlider extends JPanel {
@@ -61,6 +61,7 @@ public class HomeSlider extends JPanel {
 			imageSliderContainer.setHorizontalAlignment(JLabel.CENTER);
 			imageSliderContainer.setIcon(imageSliders.get(0));
 			imageSliderContainer.setBorder(border);
+			imageSliderContainer.setBackground(Color.WHITE);
 		}
 
 		return imageSliderContainer;

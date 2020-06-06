@@ -19,6 +19,10 @@ public class CartController {
 		return CartRepository.getCartByID(id);
 	}
 	
+	public static int getTotalCart() {
+		return CartRepository.getTotalCart();
+	}
+	
 	public static boolean isCartExist(String id) {
 		return CartRepository.isCartExist(id);
 	}

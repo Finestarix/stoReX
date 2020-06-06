@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.concurrent.Callable;
 
 import javax.swing.ImageIcon;
@@ -19,13 +17,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import app.controller.CartController;
-import app.controller.ProductController;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.model.Cart;
-import session.ImageCaching;
-import util.ColorHandler;
-import util.MessageHandler;
+import app.session.ImageCaching;
+import app.util.ColorHandler;
+import app.util.CurrencyHandler;
+import app.util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class CartList extends JPanel {
@@ -114,16 +112,8 @@ public class CartList extends JPanel {
 
 	private JLabel getPriceLabel() {
 		if (priceLabel == null) {
-			DecimalFormatSymbols decimalFormatSymbols = new DecimalFormatSymbols();
-			decimalFormatSymbols.setCurrencySymbol("Rp. ");
-			decimalFormatSymbols.setMonetaryDecimalSeparator(',');
-			decimalFormatSymbols.setGroupingSeparator('.');
-
-			DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-			decimalFormat.setDecimalFormatSymbols(decimalFormatSymbols);
-
 			int productPrice = cart.getPrice();
-			String productPriceString = decimalFormat.format(productPrice);
+			String productPriceString = CurrencyHandler.getRupiahFormat(productPrice);
 			priceLabel = LabelFactory.getInstance().create("@" + productPriceString, false);
 		}
 

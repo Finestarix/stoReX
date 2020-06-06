@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import app.model.User;
 import app.repository.UserRepository;
-import util.HashingHandler;
+import app.util.HashingHandler;
 
 public class UserController {
 

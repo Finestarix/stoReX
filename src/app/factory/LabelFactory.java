@@ -7,8 +7,8 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import util.ColorHandler;
-import util.ImageHandler;
+import app.util.ColorHandler;
+import app.util.ImageHandler;
 
 public class LabelFactory {
 

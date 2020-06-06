@@ -25,6 +25,10 @@ public class CartRepository {
 				return cart;
 		return null;
 	}
+	
+	public static int getTotalCart() {
+		return carts.size();
+	}
 
 	public static boolean isCartExist(String id) {
 		for (Cart cart : carts)

@@ -20,9 +20,9 @@ import app.controller.UserController;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.model.User;
-import session.ImageCaching;
-import util.ColorHandler;
-import util.MessageHandler;
+import app.session.ImageCaching;
+import app.util.ColorHandler;
+import app.util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class UserList extends JPanel implements UserInterface {

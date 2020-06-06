@@ -17,8 +17,8 @@ import javax.swing.border.MatteBorder;
 import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
-import session.ImageCaching;
-import util.ColorHandler;
+import app.session.ImageCaching;
+import app.util.ColorHandler;
 
 @SuppressWarnings("serial")
 public class ManageUserPanel extends JPanel {

@@ -24,9 +24,12 @@ import app.controller.CartController;
 import app.factory.ButtonFactory;
 import app.factory.TextFieldFactory;
 import app.model.Cart;
+import app.session.ImageCaching;
+import app.util.ColorHandler;
+import app.util.MessageHandler;
+import app.view.user.UserMainFrame;
 import app.view.user.cart.template.CartList;
-import session.ImageCaching;
-import util.ColorHandler;
+import app.view.user.payment.PaymentFrame;
 
 @SuppressWarnings("serial")
 public class ViewCartPanel extends JPanel {
@@ -50,6 +53,7 @@ public class ViewCartPanel extends JPanel {
 		initializeComponent();
 
 		getSearchButton().addActionListener(searchActionListener);
+		getPayButton().addActionListener(payActionListener);
 	}
 
 	private void initializePanel() {
@@ -97,7 +101,7 @@ public class ViewCartPanel extends JPanel {
 
 		return searchButton;
 	}
-	
+
 	private JButton getPayButton() {
 		if (payButton == null) {
 			ImageIcon imageIconPay = ImageCaching.getPayIcon();
@@ -122,20 +126,20 @@ public class ViewCartPanel extends JPanel {
 			jScrollPane.setBackground(PANEL_COLOR);
 			jScrollPane.setLayout(new ScrollPaneLayout());
 			jScrollPane.getViewport().setBackground(PANEL_COLOR);
-			
+
 			refreshPanel();
 		}
 
 		return cartListPanel;
 	}
 
-	public void refreshPanel() {
+	public void refreshPanel() {		
 		initializeCartListPanel().removeAll();
 
 		String searchCondition = getSearchTextField().getText().toString();
 		new ProductFetcher(searchCondition).execute();
 	}
-	
+
 	public class ProductFetcher extends SwingWorker<Void, Cart> {
 
 		private GridBagConstraints gridBagConstraints;
@@ -153,7 +157,7 @@ public class ViewCartPanel extends JPanel {
 		@Override
 		protected Void doInBackground() throws Exception {
 			ArrayList<Cart> carts = (searchCondition.isEmpty()) ? CartController.getAllCarts()
-							: CartController.getAllCarts(searchCondition);
+					: CartController.getAllCarts(searchCondition);
 			for (Cart cart : carts)
 				publish(cart);
 			return null;
@@ -163,12 +167,12 @@ public class ViewCartPanel extends JPanel {
 		protected void process(List<Cart> chunks) {
 			for (int i = 0; i < chunks.size(); i++) {
 				Cart cart = chunks.get(i);
-				CartList cartList =  new CartList(cart);
+				CartList cartList = new CartList(cart);
 				cartList.setRefreshCallable(() -> {
 					refreshPanel();
 					return null;
 				});
-				
+
 				initializeCartListPanel().add(cartList, gridBagConstraints);
 			}
 		}
@@ -186,6 +190,27 @@ public class ViewCartPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			refreshPanel();
+		}
+	};
+
+	private ActionListener payActionListener = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if (CartController.getAllCarts().size() == 0) {
+				String message = "Your cart is empty !";
+				MessageHandler.error(message);
+				return;
+			}
+			
+			new PaymentFrame(() -> {
+				System.out.println("Called");
+				UserMainFrame.cardMainFrame.getViewCartPanel().refreshPanel();
+				UserMainFrame.cardMainFrame.getViewProductPanel().refreshPanel(true);
+				UserMainFrame.cardMainFrame.getViewProductPanel().currentProductPage = 1;
+				return null;
+			});
 		}
 	};
 }

@@ -1,14 +1,19 @@
-package util;
+package app.util;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class FileHandler {
 
-	public static final String ASSET_DIRECTORY = "\\src\\app\\asset";
+	public static final String ASSET_DIRECTORY = "\\src\\assets";
+	public static final String RECEIPT_DIRECTORY = "\\src\\receipts";
 
 	public static String getAssetsPath() {
 		return System.getProperty("user.dir") + ASSET_DIRECTORY;
+	}
+	
+	public static String getReceiptPath() {
+		return System.getProperty("user.dir") + RECEIPT_DIRECTORY;
 	}
 
 	public static String getAssetsPath(String fileName) {

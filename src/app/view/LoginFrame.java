@@ -26,16 +26,16 @@ import app.factory.ButtonFactory;
 import app.factory.LabelFactory;
 import app.factory.TextFieldFactory;
 import app.model.User;
+import app.session.ImageCaching;
+import app.session.UserSession;
+import app.util.ColorHandler;
+import app.util.MessageHandler;
 import app.validator.Validator;
 import app.validator.rule.UserEmailRule;
 import app.validator.rule.UserPasswordRule;
 import app.validator.rule.parent.Rule;
 import app.view.admin.AdminMainFrame;
 import app.view.user.UserMainFrame;
-import session.ImageCaching;
-import session.UserSession;
-import util.ColorHandler;
-import util.MessageHandler;
 
 @SuppressWarnings("serial")
 public class LoginFrame extends JFrame {

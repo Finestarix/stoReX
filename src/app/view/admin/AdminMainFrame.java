@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import app.factory.ButtonFactory;
-import session.ImageCaching;
+import app.session.ImageCaching;
 
 @SuppressWarnings("serial")
 public class AdminMainFrame extends JFrame {

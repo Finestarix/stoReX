@@ -27,9 +27,9 @@ import app.controller.ProductController;
 import app.factory.ButtonFactory;
 import app.factory.TextFieldFactory;
 import app.model.Product;
+import app.session.ImageCaching;
+import app.util.ColorHandler;
 import app.view.user.product.template.ProductList;
-import session.ImageCaching;
-import util.ColorHandler;
 
 @SuppressWarnings("serial")
 public class ViewProductPanel extends JPanel {
@@ -48,7 +48,7 @@ public class ViewProductPanel extends JPanel {
 	private JScrollBar jScrollBar;
 
 	private int totalComponentLoaded = 0;
-	private int currentProductPage = 1;
+	public int currentProductPage = 1;
 	private int totalProduct = 0;
 
 	public ViewProductPanel() {
@@ -129,6 +129,8 @@ public class ViewProductPanel extends JPanel {
 	}
 
 	public void refreshPanel(boolean isRefresh) {
+		System.out.println("Called Product");
+		
 		if (isRefresh)
 			initializeProductListPanel().removeAll();
 
@@ -159,7 +161,7 @@ public class ViewProductPanel extends JPanel {
 		private GridBagConstraints gridBagConstraints;
 
 		private String searchCondition;
-
+		
 		public ProductFetcher(boolean isRefresh, String searchCondition) {
 			this.searchCondition = searchCondition;
 
@@ -171,7 +173,7 @@ public class ViewProductPanel extends JPanel {
 		@Override
 		protected Void doInBackground() throws Exception {
 			ArrayList<Product> products = null;
-
+			
 			products = (searchCondition.isEmpty()) ? ProductController.getProductsPerPage(currentProductPage)
 					: ProductController.getProductsPerPage(currentProductPage, searchCondition);
 
