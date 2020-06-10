@@ -262,11 +262,15 @@ public class LoginFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
-			// User			
+			/**
+			 * User Account
+			 */
 //			getEmailTextField().setText("anglie.yanto@storex.com");
 //			getPasswordTextField().setText("storex123");
 
-			// Admin
+			/**
+			 * Admin Account
+			 */
 //			getEmailTextField().setText("renaldy@storex.com");
 //			getPasswordTextField().setText("storex123");
 			
