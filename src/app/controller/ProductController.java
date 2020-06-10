@@ -40,6 +40,10 @@ public class ProductController {
 		return ProductRepository.getTotalProduct(searchCondition);
 	}
 	
+	public static void insertNewProduct(Product product) {
+		ProductRepository.insertProduct(product);
+	}
+	
 	public static void insertNewProduct(String name, int price, int quantity) {
 		String id = UUID.randomUUID().toString();
 		Product product = new Product(id, name, price, quantity);

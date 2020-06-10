@@ -18,6 +18,7 @@ import app.session.ImageCaching;
 @SuppressWarnings("serial")
 public class HomeSlider extends JPanel {
 
+	private static final Color PANEL_COLOR = Color.WHITE;
 	private static final int X_GAP = 10;
 	private static final int Y_GAP = 0;
 
@@ -37,6 +38,7 @@ public class HomeSlider extends JPanel {
 	}
 
 	private void initializePanel() {
+		setBackground(PANEL_COLOR);
 		setLayout(new BorderLayout());
 	}
 

@@ -1,0 +1,266 @@
+[
+   {
+      "id":"b1ba4a4a-9167-48b3-b648-86af79eb7a79",
+      "name":"Renaldy",
+      "email":"renaldy@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"Admin",
+      "status":"Active"
+   },
+   {
+      "id":"29dcf163-a49a-11ea-b347-e4e7499a064e",
+      "name":"Anglie Yanto",
+      "email":"anglie.yanto@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25b86cd9-a49b-11ea-b347-e4e7499a064e",
+      "name":"Anglie Yanto",
+      "email":"anglie.yanto@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb8ccf-a49b-11ea-b347-e4e7499a064e",
+      "name":"Jethro Otto",
+      "email":"jethro.otto@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb8e77-a49b-11ea-b347-e4e7499a064e",
+      "name":"Danny Wiselee",
+      "email":"danny.wiselee@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb8ecd-a49b-11ea-b347-e4e7499a064e",
+      "name":"Karen Prisilia Iing",
+      "email":"karen.iing@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb8f1b-a49b-11ea-b347-e4e7499a064e",
+      "name":"Jose Armando",
+      "email":"jose.armando@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb8f68-a49b-11ea-b347-e4e7499a064e",
+      "name":"Kevin Surya Wahyudi",
+      "email":"kevin.wahyudi@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb8ff1-a49b-11ea-b347-e4e7499a064e",
+      "name":"Alvin Wijaya",
+      "email":"alvin.wijaya@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb9036-a49b-11ea-b347-e4e7499a064e",
+      "name":"Britney Lavenda Yauri",
+      "email":"britney.yauri@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb9074-a49b-11ea-b347-e4e7499a064e",
+      "name":"Malvin Wikarsa",
+      "email":"malvin.wikarsa@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb90b1-a49b-11ea-b347-e4e7499a064e",
+      "name":"Benaya Nusantara Edgardo",
+      "email":"benaya.edgardo@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb90ef-a49b-11ea-b347-e4e7499a064e",
+      "name":"Benedictus Danielle",
+      "email":"benedictus.danielle@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb9135-a49b-11ea-b347-e4e7499a064e",
+      "name":"Audrey Chen",
+      "email":"audrey.chen@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"25bb9175-a49b-11ea-b347-e4e7499a064e",
+      "name":"Alicia",
+      "email":"alicia@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"5b654d4d-a49c-11ea-b347-e4e7499a064e",
+      "name":"Noptovius Halimawan",
+      "email":"noptovius.halimawan@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"5b6959d3-a49c-11ea-b347-e4e7499a064e",
+      "name":"Hanni Yolina",
+      "email":"hanni.yolina@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"5b695c26-a49c-11ea-b347-e4e7499a064e",
+      "name":"Natasia",
+      "email":"natasia@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"5b695d09-a49c-11ea-b347-e4e7499a064e",
+      "name":"Christina Yuanita",
+      "email":"christina.yuanita@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"5b695d7e-a49c-11ea-b347-e4e7499a064e",
+      "name":"Faustina Sidik",
+      "email":"faustina.sidik@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"5b695df8-a49c-11ea-b347-e4e7499a064e",
+      "name":"Kevin Fausta",
+      "email":"kevin.fausta@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"5b695e6e-a49c-11ea-b347-e4e7499a064e",
+      "name":"Antonius Wijaya",
+      "email":"antonius.wijaya@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08a9cc7a-a49e-11ea-b347-e4e7499a064e",
+      "name":"Andree Benaya Abyatar",
+      "email":"andree.abyatar@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad10b8-a49e-11ea-b347-e4e7499a064e",
+      "name":"Devinca Limto",
+      "email":"devinca.limto@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad129e-a49e-11ea-b347-e4e7499a064e",
+      "name":"Nelson Mario Latif",
+      "email":"nelson.mario@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad1325-a49e-11ea-b347-e4e7499a064e",
+      "name":"Angelia Salim",
+      "email":"angelia.salim@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad13a2-a49e-11ea-b347-e4e7499a064e",
+      "name":"Junaedi Dede",
+      "email":"junaedi.dede@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad1427-a49e-11ea-b347-e4e7499a064e",
+      "name":"Ryan Sanjaya",
+      "email":"ryan.sanjaya@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad14a6-a49e-11ea-b347-e4e7499a064e",
+      "name":"Nicky Hendrick Sen",
+      "email":"nicky.sen@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad1531-a49e-11ea-b347-e4e7499a064e",
+      "name":"Ferdryan Cen",
+      "email":"ferdryan.cen@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad1600-a49e-11ea-b347-e4e7499a064e",
+      "name":"Jonathan Gobiel",
+      "email":"jonathan.gobiel@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad1670-a49e-11ea-b347-e4e7499a064e",
+      "name":"Eigner",
+      "email":"eigner@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   },
+   {
+      "id":"08ad16d6-a49e-11ea-b347-e4e7499a064e",
+      "name":"Kenny",
+      "email":"kenny@storex.com",
+      "password":"bcfa5dd59d82a9fbf514e81b7b7aa49e0499f60b49d9e940a1167b367892234a",
+      "role":"User",
+      "status":"Active"
+   }
+]

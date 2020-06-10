@@ -35,8 +35,7 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-PRIMARY KEY (`id`)
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -202,8 +201,7 @@ INSERT INTO `products` (`id`, `name`, `price`, `quantity`, `created_at`, `update
 CREATE TABLE `transaction_detail` (
   `transaction_id` varchar(40) NOT NULL,
   `product_id` varchar(40) NOT NULL,
-  `quantity` int(11) NOT NULL,
-PRIMARY KEY (`transaction_id`, `product_id`)
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -216,8 +214,7 @@ CREATE TABLE `transaction_header` (
   `id` varchar(40) NOT NULL,
   `user_id` varchar(40) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `report_name` varchar(40) NOT NULL,
-PRIMARY KEY (`id`)
+  `report_name` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -234,8 +231,7 @@ CREATE TABLE `users` (
   `role` varchar(10) NOT NULL DEFAULT 'User',
   `status` varchar(10) NOT NULL DEFAULT 'Active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-PRIMARY KEY (`id`)
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

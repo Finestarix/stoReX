@@ -1,4 +1,4 @@
-package app.util;
+package app.util.product;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,19 +17,20 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import app.controller.CartController;
-import app.model.Cart;
-import app.session.UserSession;
+import app.controller.ProductController;
+import app.model.Product;
+import app.util.FileHandler;
+import app.util.MessageHandler;
 
-public class ReceiptHandler {
+public class WriteProductHandler {
 
-	private static final String FILE = FileHandler.getReceiptPath();
+	private static final String FILE = FileHandler.getDatabasePath();
 
 	private static Font regularFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.BOLD);
 	private static Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 8, Font.BOLD);
 	private static Font smallFont = new Font(Font.FontFamily.TIMES_ROMAN, 6, Font.NORMAL);
-	
-	public static void getReceiptPDF(String fileName) {
+
+	public static void generateProductReport(String fileName) {
 
 		fileName = FILE + "//" + fileName;
 
@@ -58,9 +59,9 @@ public class ReceiptHandler {
 	}
 
 	private static void addMetaData(Document document) {
-		document.addTitle("stoReX Invoice");
+		document.addTitle("stoReX Products");
 		document.addSubject("Created by RX19-2");
-		document.addKeywords("JavaH2BP, PDF, Invoice");
+		document.addKeywords("JavaH2BP, PDF, Products");
 		document.addAuthor("RX19-2");
 		document.addCreator("RX19-2");
 	}
@@ -68,21 +69,18 @@ public class ReceiptHandler {
 	private static void addHeaderPage(Document document) throws DocumentException {
 		Paragraph preface = new Paragraph();
 
-		preface.add(new Paragraph("stoReX Invoice", regularFont));
+		preface.add(new Paragraph("stoReX Products", regularFont));
 		addEmptyLine(preface, 1);
 
-		preface.add(new Paragraph(
-				"Customer Name: " + UserSession.getUser().getName() + "(" + UserSession.getUser().getEmail() + ")",
-				boldFont));
 		Date date = new Date();
-		preface.add(new Paragraph("Date: " + date, boldFont));
+		preface.add(new Paragraph("Generate Date: " + date, boldFont));
 		addEmptyLine(preface, 1);
 
 		document.add(preface);
 	}
 
 	private static void addTransactionContent(Document document) throws DocumentException {
-		PdfPTable pdfPTable = new PdfPTable(5);
+		PdfPTable pdfPTable = new PdfPTable(4);
 		pdfPTable.setWidthPercentage(100);
 		pdfPTable.setHorizontalAlignment(Element.ALIGN_LEFT);
 
@@ -104,34 +102,22 @@ public class ReceiptHandler {
 		pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		pdfPTable.addCell(pdfPCell);
 
-		pdfPCell = new PdfPCell(new Phrase("Sub-Total", smallFont));
-		pdfPCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-		pdfPTable.addCell(pdfPCell);
+		ArrayList<Product> products = ProductController.getAllProduct();
+		for (int i = 0; i < products.size(); i++) {
+			Product product = products.get(i);
 
-		pdfPTable.setHeaderRows(1);
-
-		double totalPrice = 0;
-		ArrayList<Cart> carts = CartController.getAllCarts();
-		for (int i = 0; i < carts.size(); i++) {
-			Cart cart = carts.get(i);
-
-			String id = cart.getId();
-			String name = cart.getName();
-			String price = CurrencyHandler.getRupiahFormat(cart.getPrice());
-			String quantity = Integer.toString(cart.getQuantity()) + " Piece(s)";
-			String subTotal = CurrencyHandler.getRupiahFormat(cart.getPrice() * cart.getQuantity());
-			totalPrice += cart.getPrice() * cart.getQuantity();
+			String id = product.getId();
+			String name = product.getName();
+			String price = Integer.toString(product.getPrice());
+			String quantity = Integer.toString(product.getQuantity());
 
 			pdfPTable.addCell(new PdfPCell(new Phrase(id, smallFont)));
 			pdfPTable.addCell(new PdfPCell(new Phrase(name, smallFont)));
 			pdfPTable.addCell(new PdfPCell(new Phrase(price, smallFont)));
 			pdfPTable.addCell(new PdfPCell(new Phrase(quantity, smallFont)));
-			pdfPTable.addCell(new PdfPCell(new Phrase(subTotal, smallFont)));
 		}
 
 		document.add(pdfPTable);
-		
-		document.add(new Paragraph("Total Price: " + Double.toString(totalPrice), boldFont));
 	}
 
 	private static void addEmptyLine(Paragraph paragraph, int enter) {
@@ -139,5 +125,5 @@ public class ReceiptHandler {
 			paragraph.add(new Paragraph(" "));
 		}
 	}
-
+	
 }

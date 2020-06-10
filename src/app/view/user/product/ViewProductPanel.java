@@ -128,9 +128,7 @@ public class ViewProductPanel extends JPanel {
 		return productListPanel;
 	}
 
-	public void refreshPanel(boolean isRefresh) {
-		System.out.println("Called Product");
-		
+	public void refreshPanel(boolean isRefresh) {		
 		if (isRefresh)
 			initializeProductListPanel().removeAll();
 

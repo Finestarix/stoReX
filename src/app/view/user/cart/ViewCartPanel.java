@@ -205,7 +205,6 @@ public class ViewCartPanel extends JPanel {
 			}
 			
 			new PaymentFrame(() -> {
-				System.out.println("Called");
 				UserMainFrame.cardMainFrame.getViewCartPanel().refreshPanel();
 				UserMainFrame.cardMainFrame.getViewProductPanel().refreshPanel(true);
 				UserMainFrame.cardMainFrame.getViewProductPanel().currentProductPage = 1;

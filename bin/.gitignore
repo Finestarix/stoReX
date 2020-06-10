@@ -1,6 +1,4 @@
-/util/
 /app/
-/session/
-/assets/
-/receipt/
-/receipts/
+/main/
+/database/
+/products/

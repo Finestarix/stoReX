@@ -34,6 +34,10 @@ public class UserController {
 		return user;
 	}
 	
+	public static void insertNewUser(User user) {
+		UserRepository.insertUser(user);
+	}
+	
 	public static void insertNewUser(String name, String email, String password) {
 		String id = UUID.randomUUID().toString();
 		String hashedPassword = HashingHandler.SHA256(password);
