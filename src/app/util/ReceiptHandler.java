@@ -131,7 +131,7 @@ public class ReceiptHandler {
 
 		document.add(pdfPTable);
 		
-		document.add(new Paragraph("Total Price: " + Double.toString(totalPrice), boldFont));
+		document.add(new Paragraph("Total Price: " + CurrencyHandler.getRupiahFormat(totalPrice), boldFont));
 	}
 
 	private static void addEmptyLine(Paragraph paragraph, int enter) {
