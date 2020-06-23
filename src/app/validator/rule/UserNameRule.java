@@ -27,7 +27,7 @@ public class UserNameRule implements Rule {
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(name);
 			if (!matcher.matches())
-				return "Name must contain only alphanumeric characters.";
+				return "Name must contain only alphabethic characters.";
 		}
 
 		return "";

@@ -27,7 +27,7 @@ public class UserPasswordRule implements Rule{
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(password);
 			if (!matcher.matches())
-				return "Password must be alphanumeric.";
+				return "Password must contain only alphanumeric characters.";
 		}
 
 		return "";

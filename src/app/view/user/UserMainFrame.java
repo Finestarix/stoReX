@@ -183,6 +183,7 @@ public class UserMainFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			CartController.removeAllCart();
+			cardMainFrame.getViewCartPanel().refreshPanel();
 			dispose();
 		}
 	};

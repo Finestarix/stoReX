@@ -9,7 +9,7 @@ import javax.swing.JDialog;
 @SuppressWarnings("serial")
 public class DialogFactory extends JDialog {
 
-	private static final String DIALOG_TITLE = "stoReX Add Product Dialog";
+	private static final String DIALOG_TITLE = "stoReX Add/Update Product Dialog";
 	private static final Color DIALOG_COLOR = Color.WHITE;
 	private static final int DIALOG_WIDTH = 300;
 	private static final int DIALOG_HEIGHT = 350;
